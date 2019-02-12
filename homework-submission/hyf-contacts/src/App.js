@@ -7,58 +7,105 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      contact: MockData,
-      showFull: {
-        id: 1,
-        firstName: "Ron",
-        lastName: "Brookes",
-        mobile: "(530) 4689217",
-        telephone: "(301) 8210933",
-        email: "rbrookes0@timesonline.co.uk",
-        homeAddress: "38816 Weeping Birch Park",
-        profileImage:
-          "https://enigmeta.s3.amazonaws.com/hackyourfuture/avatars/male-1.jpg"
-      },
-      active: false,
-      searchText: "",
-      filtered: MockData
+      contacts: MockData,
+      activeContactIndex: 0,
+      filtered: MockData,
+      activeContactDetails: [
+        { mobile: "(530) 4689217" },
+        { telephone: "(301) 8210933" },
+        { email: "rbrookes0@timesonline.co.uk" },
+        { homeAddress: "38816 Weeping Birch Park" }
+      ]
     };
-    this.handleSearch = this.handleSearch.bind(this);
+
     this.changeClass = this.changeClass.bind(this);
+    this.handleSearch = this.handleSearch.bind(this);
   }
 
   changeClass(oneContact) {
-    for (const contactElement of this.state.contact) {
-      contactElement.active = false;
-      this.setState({ active: false });
-    }
-    const contact = this.state.contact;
-    oneContact.active = !oneContact.active;
+    const selectedElementIndex = this.state.contacts.findIndex(
+      element => element.id === oneContact.id
+    );
+    const newDetails = Object.entries(oneContact)
+      .splice(3, 4)
+      .map(([detailName, value]) => ({ detailName, value }));
+    newDetails.map(detail => (detail.dataId = Date.now()));
     this.setState({
-      contact,
-      active: oneContact.active,
-      showFull: oneContact
+      activeContactIndex: selectedElementIndex,
+      activeContactDetails: newDetails
     });
   }
 
   handleSearch(event) {
     const searchText = event.target.value;
-    this.setState({ searchText: searchText.toLowerCase() });
-    const filtered = this.state.contact.filter(
-      oneContact =>
-        oneContact.firstName.toLowerCase().includes(this.state.searchText) |
-        oneContact.lastName.toLowerCase().includes(this.state.searchText)
+
+    const filtered = this.state.contacts.filter(
+      contactElements =>
+        contactElements.firstName
+          .toLowerCase()
+          .includes(searchText.toLowerCase()) ||
+        contactElements.lastName
+          .toLowerCase()
+          .includes(searchText.toLowerCase())
     );
+
     filtered.push(filtered);
     filtered.splice(-1, 1);
     this.setState({ filtered });
   }
 
+  renderDetails(detailContact) {
+    return (
+      <div className="details__row">
+        <label className="details__label">{detailContact.detailName}</label>
+        <span className="details__text">{detailContact.value}</span>
+      </div>
+    );
+  }
+
+  renderContact(oneContact) {
+    return (
+      <div
+        key={oneContact.id}
+        className={
+          this.state.activeContactIndex === oneContact.id - 1
+            ? "clist__contact active"
+            : "clist__contact "
+        }
+        onClick={this.changeClass.bind(this, oneContact)}
+      >
+        <div className="clist__icon">
+          <img
+            src={oneContact.profileImage}
+            alt={oneContact.firstName + " " + oneContact.lastName}
+          />
+        </div>
+        <div className="clist__name">
+          <span className="clist__firstName">{oneContact.firstName}</span>
+          <span className="clist__lastName">{oneContact.lastName}</span>
+        </div>
+      </div>
+    );
+  }
+
   render() {
-    const contactElement = this.state.filtered.map(oneContact =>
+    const {
+      contacts,
+      activeContactIndex,
+      filtered,
+      activeContactDetails
+    } = this.state;
+
+    const contactDetails = activeContactDetails.map(details =>
+      this.renderDetails(details)
+    );
+
+    const contactElements = filtered.map(oneContact =>
       this.renderContact(oneContact)
     );
-    console.log(this.state);
+
+    const activeContact = contacts[activeContactIndex];
+
     return (
       <div className="app">
         <div className="header">
@@ -90,85 +137,32 @@ class App extends Component {
                 type="search"
                 placeholder="Search"
                 onChange={this.handleSearch}
+                value={this.state.value}
               />
             </div>
-            <div className="clist__contacts">{contactElement}</div>
+            <div className="clist__contacts">{contactElements}</div>
           </div>
+
           <div className="details">
             <div className="details__large">
               <div className="details__icon">
                 <img
-                  src={this.state.showFull.profileImage}
-                  alt={
-                    this.state.showFull.firstName +
-                    " " +
-                    this.state.showFull.lastName
-                  }
+                  src={activeContact.profileImage}
+                  alt={activeContact.firstName + " " + activeContact.lastName}
                 />
               </div>
 
               <div className="details__name">
                 <span className="details__firstName">
-                  {this.state.showFull.firstName}
+                  {activeContact.firstName}
                 </span>
                 <span className="details__lastName">
-                  {this.state.showFull.lastName}
+                  {activeContact.lastName}
                 </span>
               </div>
             </div>
-            <div className="details__info">
-              <div className="details__row">
-                <label className="details__label">Mobile</label>
-                <span className="details__text">
-                  {this.state.showFull.mobile}
-                </span>
-              </div>
-
-              <div className="details__row">
-                <label className="details__label">Telephone</label>
-                <span className="details__text">
-                  {this.state.showFull.telephone}
-                </span>
-              </div>
-
-              <div className="details__row">
-                <label className="details__label">email</label>
-                <span className="details__text">
-                  {this.state.showFull.email}
-                </span>
-              </div>
-
-              <div className="details__row">
-                <label className="details__label">Home Address</label>
-                <span className="details__text">
-                  {this.state.showFull.homeAddress}
-                </span>
-              </div>
-            </div>
+            <div className="details__info">{contactDetails}</div>
           </div>
-        </div>
-      </div>
-    );
-  }
-
-  renderContact(oneContact) {
-    return (
-      <div
-        key={oneContact.id}
-        className={
-          oneContact.active ? "clist__contact active" : "clist__contact"
-        }
-        onClick={this.changeClass.bind(this, oneContact)}
-      >
-        <div className="clist__icon">
-          <img
-            src={oneContact.profileImage}
-            alt={oneContact.firstName + " " + oneContact.lastName}
-          />
-        </div>
-        <div className="clist__name">
-          <span className="clist__firstName">{oneContact.firstName}</span>
-          <span className="clist__lastName">{oneContact.lastName}</span>
         </div>
       </div>
     );
