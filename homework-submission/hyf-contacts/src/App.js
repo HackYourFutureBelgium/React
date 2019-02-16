@@ -2,25 +2,14 @@ import React, { Component } from "react";
 import "./App.css";
 import CONTACTS from "./MockData";
 
-// {
-//   id: 1,
-//   firstName: "Ron",
-//   lastName: "Brookes",
-//   mobile: "(530) 4689217",
-//   telephone: "(301) 8210933",
-//   email: "rbrookes0@timesonline.co.uk",
-//   homeAddress: "38816 Weeping Birch Park",
-//   profileImage:
-//     "https://enigmeta.s3.amazonaws.com/hackyourfuture/avatars/male-1.jpg"
-// },
-
 class App extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
       contacts: CONTACTS,
-      searchText: ""
+      searchText: "",
+      detailContactId: CONTACTS[0].id
     };
   }
 
@@ -32,9 +21,17 @@ class App extends Component {
           e.firstName.toLowerCase().includes(searchText) ||
           e.lastName.toLowerCase().includes(searchText)
       )
-      .map(({ id, firstName, lastName, profileImage, done }) => {
+      .map(({ id, firstName, lastName, profileImage, done }, ix) => {
+        let classNames =
+          this.state.detailContactId === id
+            ? "clist__contact active"
+            : "clist__contact";
         return (
-          <div key={id} className="clist__contact">
+          <div
+            key={id}
+            className={classNames}
+            onClick={event => this.updateDetail(id)}
+          >
             <div className="clist__icon">
               <img src={profileImage} alt="" />
             </div>
@@ -54,6 +51,55 @@ class App extends Component {
       contacts: CONTACTS,
       searchText: searchText
     });
+  }
+
+  updateDetail(id) {
+    this.setState({
+      detailContactId: id
+    });
+  }
+
+  generateDetail() {
+    let {
+      firstName,
+      lastName,
+      mobile,
+      telephone,
+      email,
+      homeAddress,
+      profileImage
+    } = this.state.contacts.find(e => e.id === this.state.detailContactId);
+    return (
+      <div className="details">
+        <div className="details__large">
+          <div className="details__icon">
+            <img src={profileImage} alt="" />
+          </div>
+          <div className="details__name">
+            <span className="details__firstName">{firstName}</span>
+            <span className="details__lastName">{lastName}</span>
+          </div>
+        </div>
+        <div className="details__info">
+          <div className="details__row">
+            <label className="details__label">Mobile</label>
+            <span className="details__text">{mobile}</span>
+          </div>
+          <div className="details__row">
+            <label className="details__label">Telephone</label>
+            <span className="details__text">{telephone}</span>
+          </div>
+          <div className="details__row">
+            <label className="details__label">Email</label>
+            <span className="details__text">{email}</span>
+          </div>
+          <div className="details__row">
+            <label className="details__label">Home Address</label>
+            <span className="details__text">{homeAddress}</span>
+          </div>
+        </div>
+      </div>
+    );
   }
 
   render() {
@@ -102,39 +148,7 @@ class App extends Component {
               </div>
             </div>
             {/* Contact Details */}
-            <div className="details">
-              <div className="details__large">
-                <div className="details__icon">
-                  <img src="/profiles/male-1.jpg" alt="" />
-                </div>
-                <div className="details__name">
-                  <span className="details__firstName">Ron</span>
-                  <span className="details__lastName">Brookes</span>
-                </div>
-              </div>
-              <div className="details__info">
-                <div className="details__row">
-                  <label className="details__label">Mobile</label>
-                  <span className="details__text">(530) 4689217</span>
-                </div>
-                <div className="details__row">
-                  <label className="details__label">Telephone</label>
-                  <span className="details__text">(301) 8210933</span>
-                </div>
-                <div className="details__row">
-                  <label className="details__label">Email</label>
-                  <span className="details__text">
-                    rbrookes0@timesonline.co.uk
-                  </span>
-                </div>
-                <div className="details__row">
-                  <label className="details__label">Home Address</label>
-                  <span className="details__text">
-                    38816 Weeping Birch Park
-                  </span>
-                </div>
-              </div>
-            </div>
+            {this.generateDetail()}
           </div>
         </div>
       </div>
