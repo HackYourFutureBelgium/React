@@ -25,11 +25,12 @@ class App extends Component {
   }
 
   generateItems() {
+    let searchText = this.state.searchText.toLowerCase().trim();
     return this.state.contacts
       .filter(
         e =>
-          e.firstName.toLowerCase().includes(this.state.searchText) ||
-          e.lastName.toLowerCase().includes(this.state.searchText)
+          e.firstName.toLowerCase().includes(searchText) ||
+          e.lastName.toLowerCase().includes(searchText)
       )
       .map(({ id, firstName, lastName, profileImage, done }) => {
         return (
@@ -48,7 +49,7 @@ class App extends Component {
 
   setSearchText(event) {
     event.preventDefault();
-    let searchText = event.target.value ? event.target.value.toLowerCase() : "";
+    let searchText = event.target.value ? event.target.value : "";
     this.setState({
       contacts: CONTACTS,
       searchText: searchText
