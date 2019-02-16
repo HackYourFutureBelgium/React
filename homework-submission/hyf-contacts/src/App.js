@@ -19,15 +19,21 @@ class App extends Component {
     super(props);
 
     this.state = {
-      contacts: CONTACTS
+      contacts: CONTACTS,
+      searchText: ""
     };
   }
 
   generateItems() {
-    return this.state.contacts.map(
-      ({ firstName, lastName, profileImage, done }) => {
+    return this.state.contacts
+      .filter(
+        e =>
+          e.firstName.toLowerCase().includes(this.state.searchText) ||
+          e.lastName.toLowerCase().includes(this.state.searchText)
+      )
+      .map(({ id, firstName, lastName, profileImage, done }) => {
         return (
-          <div className="clist__contact">
+          <div key={id} className="clist__contact">
             <div className="clist__icon">
               <img src={profileImage} alt="" />
             </div>
@@ -37,8 +43,16 @@ class App extends Component {
             </div>
           </div>
         );
-      }
-    );
+      });
+  }
+
+  setSearchText(event) {
+    event.preventDefault();
+    let searchText = event.target.value ? event.target.value.toLowerCase() : "";
+    this.setState({
+      contacts: CONTACTS,
+      searchText: searchText
+    });
   }
 
   render() {
@@ -76,7 +90,8 @@ class App extends Component {
                   className="clist__searchInput"
                   type="search"
                   placeholder="Search"
-                  value=""
+                  onChange={event => this.setSearchText(event)}
+                  value={this.state.searchText}
                 />
               </div>
               {/* Contact List Subpanel */}
