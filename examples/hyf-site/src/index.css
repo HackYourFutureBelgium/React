@@ -2,7 +2,8 @@
   box-sizing: border-box;
 }
 
-html, body {
+html,
+body {
   min-height: 100%;
 }
 
@@ -33,7 +34,7 @@ code {
 }
 
 header {
-  background: #1C1D21;
+  background: #1c1d21;
   color: rgba(255, 255, 255, 0.87);
   padding: 2rem;
 }
@@ -73,10 +74,10 @@ main {
 
 .page__title {
   display: inline-block;
-  color: #FC5C5D;
+  color: #fc5c5d;
   margin: 0 0 2rem 0;
   padding: 0 0 0.75rem 0;
-  border-bottom: 6px #1C1D21 solid;
+  border-bottom: 6px #1c1d21 solid;
 }
 
 .page__body {
@@ -88,7 +89,7 @@ main {
   max-width: 40rem;
   display: flex;
   flex-wrap: wrap;
- }
+}
 
 .block {
   border: 1px solid #666;
