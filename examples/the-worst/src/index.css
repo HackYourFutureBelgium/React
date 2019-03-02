@@ -1,0 +1,42 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Comic Sans MS", cursive;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+
+
+.app { display: flex; flex-direction: column; height: 100vh; }
+
+.header {
+  background: green;
+  height: 100px;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+}
+
+.header h1 { margin: 0; }
+
+.header button { padding: 5px; font: inherit; font-size: 18px; margin: 5px; border: 2px outset red; background: olive; }
+
+main { flex: 1; background: gray; }
+
+.worst { display: flex; flex-direction: row; justify-content: space-between; padding: 5px 0; border: 2px dotted pink; }
+
+.footer {
+  height: 50px;
+  background: blue;
+  border: 2px outset indigo;
+    display: flex;
+  justify-content: space-between;
+  color: white;
+}
+
+.footer  button { padding: 5px; font: inherit; font-size: 18px; margin: 5px; border: 2px outset red; background: olive; }
