@@ -1,0 +1,30 @@
+{
+  "status": "ok",
+  "worsts": [
+    {
+      "id": "w001",
+      "name": "German Sausage",
+      "price": 4.51
+    },
+    {
+      "id": "w002",
+      "name": "Frankfurter Worst",
+      "price": 3.33
+    },
+    {
+      "id": "w003",
+      "name": "Belgian Worst",
+      "price": 8.31
+    },
+    {
+      "id": "w004",
+      "name": "Chorizo",
+      "price": 4.44
+    },
+    {
+      "id": "w005",
+      "name": "French Saucisson",
+      "price": 6.21
+    }
+  ]
+}
