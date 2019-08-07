@@ -1,9 +1,25 @@
+@import url('https://fonts.googleapis.com/css?family=Cookie&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Sacramento&display=swap');
+body {
+  background: url(assets/BG.png);
+  background-size: 50%;
+}
+h1 {
+font-family: 'Sacramento', cursive;
+  font-size: 3em;
+}
 .App {
-
+background-color: white;
 }
 
 .done {
   text-decoration: line-through;
+}
+.highlight {
+background: url(assets/yellow-brushstroke.png);
+background-repeat: no-repeat;
+background-size: 100% 95%;
+padding: 8px 0;
 }
 
 .App-header {
