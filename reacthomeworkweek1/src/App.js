@@ -17,7 +17,25 @@ function App() {
       </li>);
     return <ul>{todoItems}</ul>;
   };
-
+  class FormExtraTodoInput extends React.Component{
+    render(){
+      return (
+        <form>
+    <label>
+      To do :
+      <input type="text" name="extraTodoName" />
+    </label>
+    < br/>
+    <label>
+      Deadline :
+      <input type="text" name="extraTodoDeadline"/>
+    </label>
+    < br/>
+    <input type="submit" value="Submit" />
+  </form>
+      );
+    }
+  }
   class DynamicTodoList extends React.Component{
     constructor(props){
       super(props);
@@ -50,6 +68,7 @@ function App() {
           </article>
       </section>
       <DynamicTodoList />
+      <FormExtraTodoInput />
     </div>
   );
 }

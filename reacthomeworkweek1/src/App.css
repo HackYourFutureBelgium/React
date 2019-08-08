@@ -1,15 +1,32 @@
-@import url('https://fonts.googleapis.com/css?family=Cookie&display=swap');
-@import url('https://fonts.googleapis.com/css?family=Sacramento&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Coming+Soon|Playfair+Display+SC:700|Sacramento&display=swap');
 body {
   background: url(assets/BG.png);
   background-size: 50%;
 }
 h1 {
-font-family: 'Sacramento', cursive;
+  font-family: 'Sacramento', cursive;
   font-size: 3em;
+  text-align: center;
 }
+h2 {
+  font-family: 'Playfair Display SC', serif;
+}
+span, li, input {
+  font-family: 'Coming Soon', cursive;
+}
+
+li {
+  margin-bottom: 10px;
+}
+label {
+  font-family: 'Sacramento', cursive;
+}
+
 .App {
-background-color: white;
+background-color: #FEF5F7;
+width: 50%;
+margin: 0 auto;
+padding: 20px;
 }
 
 .done {
