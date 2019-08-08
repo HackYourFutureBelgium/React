@@ -30,7 +30,7 @@ padding: 20px;
 }
 
 .done {
-  text-decoration: line-through;
+  text-decoration: line-through wavy red;
 }
 .highlight {
 background: url(assets/yellow-brushstroke.png);

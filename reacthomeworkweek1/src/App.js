@@ -11,7 +11,7 @@ function App() {
   const TodoItem = (props) => {
     const todoItems = props.todo1.map((item, i) =>
       <li key={i}>
-        <span className={`highlight ${item.done ? "done" : ""}`}>Activity: {item.description}</span><br/>
+        <span className={`highlight ${item.done ? "done" : ""}`}>Activity: {item.activity}</span><br/>
         <span>Deadline: {item.deadline}</span><br/>
         <span>Status: {item.done ? "Done" : "Not Yet"}</span>
       </li>);
@@ -20,7 +20,7 @@ function App() {
   class FormExtraTodoInput extends React.Component{
     render(){
       return (
-        <form>
+        <form action="" method="POST">
     <label>
       To do :
       <input type="text" name="extraTodoName" />
@@ -28,7 +28,7 @@ function App() {
     < br/>
     <label>
       Deadline :
-      <input type="text" name="extraTodoDeadline"/>
+      <input type="date" name="extraTodoDeadline"/>
     </label>
     < br/>
     <input type="submit" value="Submit" />
