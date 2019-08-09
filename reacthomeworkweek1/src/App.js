@@ -1,6 +1,7 @@
 import React from 'react';
 import './App.css';
 import api from './api';
+import moment from 'moment';
 window.api = api;
 
 function App() {
@@ -12,7 +13,7 @@ function App() {
     const todoItems = props.todo1.map((item, i) =>
       <li key={i}>
         <span className={`highlight ${item.done ? "done" : ""}`}>Activity: {item.activity}</span><br/>
-        <span>Deadline: {item.deadline}</span><br/>
+        <span>Deadline: {moment(item.deadline).format("MMM Do YY")}</span><br/>
         <span>Status: {item.done ? "Done" : "Not Yet"}</span>
       </li>);
     return <ul>{todoItems}</ul>;
