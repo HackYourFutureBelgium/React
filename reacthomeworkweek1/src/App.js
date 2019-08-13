@@ -12,9 +12,9 @@ function App() {
   const TodoItem = (props) => {
     const todoItems = props.todo1.map((item, i) =>
       <li key={i}>
-        <span className={`highlight ${item.done ? "done" : ""}`}>Activity: {item.activity}</span><br/>
+        <span className={`highlight ${item.is_done ? "done" : ""}`}>Activity: {item.activity}</span><br/>
         <span>Deadline: {moment(item.deadline).format("MMM Do YY")}</span><br/>
-        <span>Status: {item.done ? "Done" : "Not Yet"}</span>
+        <span>Status: {item.is_done ? "Done" : "Not Yet"}</span>
       </li>);
     return <ul>{todoItems}</ul>;
   };
