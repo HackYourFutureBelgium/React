@@ -8,7 +8,11 @@ async function  getTodos() {
     return database.query('SELECT * from todo');
 };
 
-
+async function insertTodos(extratodo) {
+  var insertTodo = "INSERT INTO todo (activity, deadline, is_done) VALUES (?, ?, ?)";
+  return database.query(insertTodo, [extratodo.name, extratodo.date, extratodo.status ? 1 : 0]);
+};
 module.exports = {
-  getTodos
+  getTodos,
+  insertTodos
 };

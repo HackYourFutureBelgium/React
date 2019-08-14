@@ -14,26 +14,55 @@ function App() {
       </li>);
     return <ul>{todoItems}</ul>;
   };
-  class FormExtraTodoInput extends React.Component{
+  const LabelInput = ({labeltext, type, name, value, onChange, className= " "}) => {
+    return (
+      <label htmlFor={name} className={className}>
+        {labeltext}
+        <input type={type} name={name} id={name} onChange={onChange} value={value}/>
+        <br />
+      </label>
+    );
+  };
+  class FormTodo extends React.Component{
+    constructor(props){
+      super(props);
+      this.state = {
+        name: "",
+        date: "",
+        status: ""
+      };
+    }
+    handleNameChange = (e) => {
+      this.setState({name: e.target.value});
+    };
+    handleDateChange = (e) => {
+      this.setState({date: e.target.value});
+    };
+    handleStatusChange = (e) => {
+      this.setState({status: e.target.value});
+    };
+    handleSubmit = e => {
+      e.preventDefault();
+      api.addTodo({
+        name: this.state.name,
+        date:this.state.date,
+        status: false
+      });
+      console.log(this.state);
+    };
     render(){
       return (
-        <form action="" method="POST">
-    <label>
-      To do :
-      <input type="text" name="extraTodoName" />
-    </label>
-    < br/>
-    <label>
-      Deadline :
-      <input type="date" name="extraTodoDeadline"/>
-    </label>
-    < br/>
-    <input type="submit" value="Submit" />
-  </form>
+        <form onSubmit={this.handleSubmit} action="" method="POST">
+          <p>Please insert todo list for Alfi</p>
+          <LabelInput type = {"text"} labeltext={"To do :"} name={"extraTodoName"} value={this.state.name} onChange={this.handleNameChange}/>
+          <LabelInput type = {"date"} labeltext={"Deadline :"} name={"extraTodoDeadline"} value={this.state.date} onChange={this.handleDateChange}/>
+          <LabelInput type = {"text"} labeltext={"Status:"} name={"extraIsDone"} value={this.state.status} onChange={this.handleStatusChange}/>
+          <input type="submit" value="Submit" />
+        </form>
       );
     }
   }
-  class DynamicTodoList extends React.Component{
+  class TodoView extends React.Component{
     constructor(props){
       super(props);
       this.state = {todo: []};
@@ -52,8 +81,8 @@ function App() {
   }
   return (
     <div className="App">
-      <DynamicTodoList />
-      <FormExtraTodoInput />
+      <TodoView />
+      <FormTodo />
     </div>
   );
 }
