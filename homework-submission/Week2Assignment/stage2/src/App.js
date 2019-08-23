@@ -22,17 +22,18 @@ export default class App extends Component {
     const TodoArr = this.state.TodoArr.filter(todo => todo.id !== id);
     this.setState({ TodoArr });
   };
-  done = id => {
+ 
+ done = id => {
     console.log(id);
     console.log(this.state.TodoArr);
-    const TodoArr = this.state.TodoArr.map(todo =>
-      todo.id === id ? todo.done === !todo.done : todo.done === !todo.done,
-    );
-    this.setState({
-      TodoArr,
+    const TodoArr = this.state.TodoArr.map(todo => {
+      if (todo.id === id) {
+        todo.done = !todo.done;
+      }
+      return todo;
     });
+    this.setState({ TodoArr });
   };
-
   render() {
     return (
       <div className="App">
