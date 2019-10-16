@@ -10,31 +10,21 @@ import {
   Route
 } from "react-router-dom";
 
-const App = () =>
-  (
-    <div className='site'>
-      {console.log(data)}
-      <Router>
+const App = () => (
+  <div className='site'>
+    <Router>
       <Navigation data={data} />
         <Switch>
           {
             data.map((dataObject, key) => (
               <Route exact path={dataObject.url} key={key}>
                 <Page data={dataObject}/>
-          </Route>
+              </Route>
             ))
           }
         </Switch>
-      </Router>
-      {
-        /*
-      1. page Component
-      2. repeating : Block Component
-      3. separate the data from the component
-      */
-      }
-    </div>
+    </Router>
+  </div>
   );
-
 
 export default App;

@@ -1,13 +1,10 @@
 import React from 'react';
 
-const Block = (props) => {
-  {console.log(props)}
-  return (
-    <div className="block">
-          <h2 className="block__title">{props.title}</h2>
-      <div className="block__body">{props.description}</div>
-        </div>
-    )
-  }
+const Block = (props) => (
+  <div className="block">
+    <h2 className="block__title">{props.title}</h2>
+    <div className="block__body">{props.description}</div>
+  </div>
+);
 
 export default Block;

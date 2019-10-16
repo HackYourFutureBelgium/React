@@ -1,11 +1,5 @@
 import React from 'react';
 
-const ListItem = (props) => {
-  return (
-    <ul>
-      <li>{props.items}</li>
-    </ul>
-  )
-}
+const ListItem = (props) =>( <li> {props.items} </li> )
 
 export default ListItem;
