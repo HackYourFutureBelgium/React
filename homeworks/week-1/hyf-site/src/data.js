@@ -19,8 +19,7 @@ const data =
           title: 'Our Training',
           description: 'Every Sunday volunteer-coaches and students meet at BeCentral in Brussels for in-person classes. Students are supported online with their homework during the week.'
         }
-     ],
-      items:[]
+     ]
     },
     {
       title: 'What do we teach?',
@@ -56,15 +55,13 @@ const data =
           title: 'React',
           description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed mollis, neque at euismod efficitur, odio elit blandit'
         }
-      ],
-      items:[]
+      ]
     },
 
     {
       title: 'who can apply?',
       url:'/who',
       description: 'We teach motivated refugees who want to start their career in web development. The course is open to anyone staying in Belgium. Women are strongly recommended to apply.',
-      blocks: [],
 
       items: [
       'You have to be very motivated to start a career in programming.',

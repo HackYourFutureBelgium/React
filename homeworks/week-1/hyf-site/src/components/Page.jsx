@@ -1,6 +1,6 @@
 import React from 'react';
 import Block from './Block';
-import ListItem from './ListItem';
+import UnOrderList from './UnOrderList';
 
 const  Page = (props)=>( 
   <main>
@@ -8,18 +8,22 @@ const  Page = (props)=>(
     <div className="page__body">{props.data.description}</div>
     <div className="page__blocks">
       {
+        (props.data.blocks===undefined)? null:
         props.data.blocks.map((blocksObject, key) => (
-          <Block title={blocksObject.title} key={key} description={blocksObject.description}/>
+          <Block
+            title={blocksObject.title}
+            key={key}
+            description={blocksObject.description}
+          />
         ))
       }
     </div>
-    <ul>
-      {
-        props.data.items.map((item, key) => (
-          <ListItem items={item} key={key}/>
-        ))
-      }   
-    </ul>
+    {
+      (props.data.items === undefined) ? null :
+        <UnOrderList
+          items={props.data.items}
+        />
+    }
   </main>
 );
 
