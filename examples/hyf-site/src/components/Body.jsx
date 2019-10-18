@@ -1,10 +1,10 @@
 import React from 'react'
-import Content from './Content';
-import Data from '../data/Data'
 import {
   Switch,
   Route,
 } from 'react-router-dom';
+import Content from './Content';
+import Data from '../data/Data'
 const contentInfo = Data.contentData;
 const navigationInfo = Data.navigationData;
 

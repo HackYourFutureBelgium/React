@@ -11,7 +11,7 @@ const Blocks = ({ blocks }) => (
   <div className="page__blocks">
     {
       blocks === undefined ? null :
-        blocks.map((block, index) => (<BlockContent key={index} title={block.title} body={block.body} />))
+        blocks.map((block, index) => <BlockContent key={index} title={block.title} body={block.body} />)
     }
   </div>
 );

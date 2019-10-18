@@ -1,8 +1,15 @@
 import React from 'react';
+import { BrowserRouter as Router } from 'react-router-dom';
 import '../css/App.css';
-import Page from './Page';
+import Body from './Body'
+import Header from './Header'
 
 const App = () => (
-  <Page />
+  <Router>
+    <div className="site">
+      <Header />
+      <Body />
+    </div >
+  </Router>
 );
 export default App;
