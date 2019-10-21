@@ -1,5 +1,8 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
+import Main from './Info';
+import Teaching from './Teaching';
+import Apply from './Apply';
 
 const navigationLinks = [
   { title: 'What is Hack Your Future?', url: '/info' },
@@ -9,95 +12,42 @@ const navigationLinks = [
 
 const NavigationItem = prop => (
   <li className="site__nav-item">
-    <a href={prop.url}>{prop.title}</a>
+    <a href={prop.url}>
+      <Link to={prop.url}>{prop.title}</Link>
+    </a>
   </li>
 );
 
 const Navigation = () => (
-  <header>
-    <h1 className="site_title">Hack Your Future</h1>
-    <nav className="site__nav">
-      <ul>
-        {navigationLinks.map((navObject, key) => (
-          <NavigationItem key={key} title={navObject.title} url={navObject.url} />
-        ))}
-      </ul>
-    </nav>
-  </header>
+  <Router>
+    <div>
+      <header>
+        <h1 className="site_title">Hack Your Future</h1>
+        <nav className="site__nav">
+          <ul>
+            {navigationLinks.map((navObject, key) => (
+              <NavigationItem key={key} title={navObject.title} url={navObject.url} />
+            ))}
+          </ul>
+        </nav>
+      </header>
+
+      <Switch>
+        <Route exact path="/">
+          <Main />
+        </Route>
+        <Route exact path="/info">
+          <Main />
+        </Route>
+        <Route path="/what">
+          <Teaching />
+        </Route>
+        <Route path="/who">
+          <Apply />
+        </Route>
+      </Switch>
+    </div>
+  </Router>
 );
 
 export default Navigation;
-
-{
-  /* export default function Nav() {
-  return (
-    <Router>
-      <div>
-        <header>
-          <Link to="/">Home</Link>
-        </header>
-        <ul>
-          <li>
-            
-          </li>
-          <li>
-            <Link to="/about">About</Link>
-          </li>
-          <li>
-            <Link to="/dashboard">Dashboard</Link>
-          </li>
-        </ul>
-
-        <hr />
-
-        {/*
-          A <Switch> looks through all its children <Route>
-          elements and renders the first one whose path
-          matches the current URL. Use a <Switch> any time
-          you have multiple routes, but you want only one
-          of them to render at a time
-        /}
-        <Switch>
-          <Route exact path="/">
-            <Home />
-          </Route>
-          <Route path="/about">
-            <About />
-          </Route>
-          <Route path="/dashboard">
-            <Dashboard />
-          </Route>
-        </Switch>
-      </div>
-    </Router>
-  );
-}
-
-// You can think of these components as "pages"
-// in your app.
-
-function Home() {
-  return (
-    <div>
-      <h2>Home</h2>
-    </div>
-  );
-}
-
-function About() {
-  return (
-    <div>
-      <h2>About</h2>
-    </div>
-  );
-}
-
-function Dashboard() {
-  return (
-    <div>
-      <h2>Dashboard</h2>
-    </div>
-  );
-}
-*/
-}
