@@ -1,26 +1,17 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import Search from './components/Search';
+import Information from './components/Information';
+import './css/App.css';
+import './css/table.css';
 
-function App() {
+let App = () => {
+  const [city, setCity] = useState('');
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Search setCity={setCity} />
+      <Information city={city} />
     </div>
-  );
-}
+  )
+};
 
 export default App;
