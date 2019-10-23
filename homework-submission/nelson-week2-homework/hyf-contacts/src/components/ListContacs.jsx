@@ -15,10 +15,7 @@ let ListContacs = ({ contactsFilter, setContactActive, contactActive }) => {
         setContactActive(response[0])
       })
       .catch(error => {
-        setList({
-          loading: 1,
-          result: error,
-        });
+        setContactActive({ id: -1, error })
       })
     return null
   }
