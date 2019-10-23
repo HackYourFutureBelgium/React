@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-let ListContacs = ({ contactsFilter, setContactActiveId, contactActiveId }) => {
+let ListContacs = ({ contactsFilter, setContactActive, contactActive }) => {
   const [list, setList] = useState({ loading: 0, result: null });
 
   if (list.loading === 0) {
@@ -12,6 +12,7 @@ let ListContacs = ({ contactsFilter, setContactActiveId, contactActiveId }) => {
           loading: 1,
           result: response,
         });
+        setContactActive(response[0])
       })
       .catch(error => {
         setList({
@@ -34,10 +35,10 @@ let ListContacs = ({ contactsFilter, setContactActiveId, contactActiveId }) => {
     <div className='clist__contacts'>
       {
         listFilter.map(contact => (
-          < div className={contact.id === contactActiveId ? 'clist__contact active' : 'clist__contact'}
+          < div className={contact.id === contactActive.id ? 'clist__contact active' : 'clist__contact'}
             key={contact.id} onClick={(event) => {
               event.preventDefault();
-              setContactActiveId(contact.id)
+              setContactActive(contact)
             }} >
             < div className='clist__icon'>
               <img src={contact.profileImage} alt='' />
