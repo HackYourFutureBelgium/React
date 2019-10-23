@@ -7,17 +7,17 @@ import ContactInfoGeneral from './ContactInfoGeneral';
 
 let Main = () => {
   const [contactsFilter, setContactsFilter] = useState('');
-  //const [contactActive, setcontactActive] = useState(0);
+  const [contactActiveId, setContactActiveId] = useState(1);
 
   return (
     <div className='main'>
       <div className='clist'>
         <ListSearch setContactsFilter={setContactsFilter} />
-        <ListContacs contactsFilter={contactsFilter} />
+        <ListContacs contactsFilter={contactsFilter} setContactActiveId={setContactActiveId} contactActiveId={contactActiveId} />
       </div>
       <div className='details'>
-        <ContactNamePhoto />
-        <ContactInfoGeneral />
+        <ContactNamePhoto contactActive={contactActiveId} />
+        <ContactInfoGeneral contactActive={contactActiveId} />
       </div>
     </div >
   )
