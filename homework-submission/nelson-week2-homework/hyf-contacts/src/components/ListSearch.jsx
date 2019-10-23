@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 
-let ListSearch = () => {
+let ListSearch = ({ setContactsFilter }) => {
   const [search, setSearch] = useState('');
+  setContactsFilter(search);
+
   return (
     <div className='clist__search'>
       <span className='clist__searchIcon'>
