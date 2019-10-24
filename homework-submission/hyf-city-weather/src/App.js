@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
-import Search from './Search';
-import Result from './Result';
+import Search from './Components/Search';
+import Result from './Components/Result';
 import './App.css';
 
 function App() {
