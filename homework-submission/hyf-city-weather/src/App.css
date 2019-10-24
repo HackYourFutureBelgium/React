@@ -3,16 +3,12 @@
 }
 label {
   font-size: 10pt;
-}
-form {
-  display: flex;
-  align-items: flex-end;
+  display: block;
 }
 input[type='search'] {
   -moz-appearance: none; /* older firefox */
   -webkit-appearance: none; /* safari, chrome, edge and ie mobile */
   appearance: none; /* rest */
-  display: block;
   padding: 3px;
   padding-left: 5px;
   font-size: 12pt;
