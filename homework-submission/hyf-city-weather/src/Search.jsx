@@ -1,9 +1,15 @@
 import React, { useState } from 'react';
 
-const Search = () => {
+const Search = ({ setSearch }) => {
+  //coming from parent component
   const [value, setValue] = useState('');
   return (
-    <form>
+    <form
+      onSubmit={event => {
+        event.preventDefault();
+        setSearch(value);
+      }}
+    >
       <label htmlFor="search"> Search the weather of any city</label>
       <input
         value={value}
