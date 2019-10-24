@@ -1,24 +1,33 @@
 .App {
-  margin: 10px;
+  margin: 10pt;
+  margin-left: 85pt;
+  margin-top: 45pt;
+  padding: 10px;
+  width: 45%;
+}
+form {
+  background-color: rgb(240, 240, 240);
+  padding-bottom: 15px;
+  padding-left: 10px;
+  padding-top: 10px;
 }
 label {
   font-size: 10pt;
-}
-form {
-  display: flex;
-  align-items: flex-end;
+  display: block;
+  color: rgb(41, 158, 41);
+  font-weight: bold;
 }
 input[type='search'] {
   -moz-appearance: none; /* older firefox */
   -webkit-appearance: none; /* safari, chrome, edge and ie mobile */
   appearance: none; /* rest */
-  display: block;
   padding: 3px;
   padding-left: 5px;
   font-size: 12pt;
   border: 1px solid gray;
   width: 300px;
   margin-top: 2px;
+  font-weight: bolder;
 }
 
 input[type='submit'] {
@@ -29,9 +38,16 @@ input[type='submit'] {
   padding: 3px;
   width: 70px;
   margin-left: 10px;
+  background-color: red;
+  color: white;
 }
 ul {
   padding-left: 0px;
+  background-color: aqua;
+  margin-top: 0;
+  padding-top: 7.5px;
+  padding-bottom: 7.5px;
+  padding-left: 10px;
 }
 li {
   display: flex;
