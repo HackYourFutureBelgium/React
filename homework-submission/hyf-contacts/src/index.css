@@ -84,6 +84,7 @@ code {
 .clist__searchIcon {
   font-size: 22px;
   margin-right: 10px;
+  width: 2rem;
 }
 .clist__searchInput {
   font: inherit;
