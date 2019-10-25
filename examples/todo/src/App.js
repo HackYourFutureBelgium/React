@@ -1,27 +1,22 @@
 import React, { Component } from 'react';
-import './App.css';
 
-class App extends Component {
+class Apply extends Component {
   render() {
     return (
-      <div className="app">
-        <div className="content_wrapper">
-          <form className="add_todo__form">
-            <input placeholder="My new todo text" />
-            <button tye="submit">ADD</button>
-          </form>
-          <div className="to_do__list_wrapper">
-            <ul>
-              <li>
-                <input name="todo" type="checkbox" />
-                <label for="todo">This is a test</label>
-              </li>
-            </ul>
-          </div>
+      <main className="page">
+        <h1 className="page__title">Who can apply?</h1>
+        <div className="page__body">
+          <p>We teach motivated refugees who want to start their career in web development. The course is open to anyone staying in Belgium. Women are strongly recommended to apply.</p>
+          <ul>
+            <li>You have to be very motivated to start a career in programming.</li>
+            <li>You have to speak English at an intermediate level.</li>
+            <li>You have to study around 25 hours per week to keep up with our program.</li>
+            <li>We accept students from all over Belgium and we cover transportation costs.</li>
+            <li>We provide laptops for students that don't have their own during the training.</li>
+          </ul>
         </div>
-      </div>
+      </main>
     );
   }
 }
-
-export default App;
+export default Apply;
