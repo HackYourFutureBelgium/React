@@ -36,7 +36,7 @@ const Result = ({ search }) => {
         {listWeather('Humidity', `${response.main.humidity}%`)}
         {listWeather('Temperature', `${response.main.temp}°C`)}
         {listWeather('Max. temperature', `${response.main.temp_max}°C`)}
-        {listWeather('Min. temperature', `${response.main.temp_min}°C`)}
+        {listWeather('Min. temperature', `${response.main.temp_max}°C`)}
       </ul>
     );
   } else if (response.cod !== 200 && response) {
