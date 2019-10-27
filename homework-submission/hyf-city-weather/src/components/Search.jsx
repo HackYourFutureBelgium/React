@@ -21,6 +21,7 @@ const Search = ({ setSearch }) => {
         type="Submit"
         value="Search"
       />
+      
     </form >
   )
 }
