@@ -1,46 +1,27 @@
 import React from 'react';
+import ListItem from './ListItem';
 
 const Body = ({ fetchResult }) => {
-  let location, description, humidity, temperature, maxTemperature, minTemperature;
+  console.log(fetchResult);
+  if (fetchResult) {
+    const {
+      name,
+      main: { humidity, temp: temperature, temp_max: maxTemperature, temp_min: minTemperature },
+      weather: [{ description }],
+    } = fetchResult;
 
-  if (!fetchResult) {
-    return null;
-  } else if (fetchResult) {
-    location = fetchResult.name;
-    description = fetchResult.weather[0].description;
-    humidity = fetchResult.main.humidity;
-    temperature = fetchResult.main.temp;
-    maxTemperature = fetchResult.main.temp_max;
-    minTemperature = fetchResult.main.temp_min;
+    return (
+      <ul>
+        <ListItem header="location" value={name} />
+        <ListItem header="description" value={description} />
+        <ListItem header="humidity" value={humidity} />
+        <ListItem header="temperature" value={temperature} />
+        <ListItem header="max-temperature" value={maxTemperature} />
+        <ListItem header="min-temperature" value={minTemperature} />
+      </ul>
+    );
   }
-  return (
-    <ul>
-      <li>
-        <span>Location</span>
-        <span>{location}</span>
-      </li>
-      <li>
-        <span>Description</span>
-        <span>{description}</span>
-      </li>
-      <li>
-        <span>Humidity</span>
-        <span>{humidity + '%'}</span>
-      </li>
-      <li>
-        <span>temperature</span>
-        <span>{temperature + '°C'}</span>
-      </li>
-      <li>
-        <span>Max temperature</span>
-        <span>{maxTemperature + '°C'}</span>
-      </li>
-      <li>
-        <span>Min temperature</span>
-        <span>{minTemperature + '°C'}</span>
-      </li>
-    </ul>
-  );
+  return null;
 };
 
 export default Body;

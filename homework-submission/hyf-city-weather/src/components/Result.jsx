@@ -10,13 +10,20 @@ const Result = ({ search }) => {
       )
         .then(res => res.json())
         .then(result => {
-          setFetchResult(result);
+          if (result.cod === 200) {
+            setFetchResult(result);
+          } else {
+            throw result.cod;
+          }
         })
-        .catch(err => console.log(err));
+        .catch(err => {
+          setFetchResult({ error: true });
+          console.error(err);
+        });
     }
   }, [search]);
 
-  return <Body fetchResult={fetchResult} />;
+  return fetchResult && fetchResult.error ? <h1>error</h1> : <Body fetchResult={fetchResult} />;
 };
 
 export default Result;
