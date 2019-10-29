@@ -3,21 +3,17 @@ import {
   Switch,
   Route,
 } from "react-router-dom";
-
-
-import { Layout, Breadcrumb } from 'antd';
+import PostList from './PostList';
+import img from '../assets/landscape.jpg';
+import { Layout } from 'antd';
 const { Content } = Layout;
 
 const Body = () => (
   <Content style={{ padding: '0 50px', marginTop: 64 }}>
     <Switch>
       <Route exact path="/">
-        <Breadcrumb style={{ margin: '16px 0' }}>
-          <Breadcrumb.Item>Home</Breadcrumb.Item>
-        </Breadcrumb>
-        <div style={{ background: '#fff', padding: 24, minHeight: 400 }}>Content
-  <h1> Conten</h1>
-        </div>
+        <img src={img} alt='landscape' className="landscape" />
+        <PostList />
       </Route>
     </Switch>
   </Content>

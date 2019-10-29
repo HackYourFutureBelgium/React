@@ -6,7 +6,7 @@ import {
 
 import Blog from './components/Blog';
 import 'antd/dist/antd.css';
-import './css/index.css';
+import './css/App.css';
 
 const App = () => (
   <div className="App">
