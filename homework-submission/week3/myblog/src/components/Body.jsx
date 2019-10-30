@@ -4,16 +4,19 @@ import {
   Route,
 } from "react-router-dom";
 import PostList from './PostList';
-import img from '../assets/landscape.jpg';
+import PostDetail from './PostDetail';
 import { Layout } from 'antd';
 const { Content } = Layout;
 
-const Body = () => (
-  <Content style={{ padding: '0 50px', marginTop: 64 }}>
+const Body = ({ data }) => (
+
+  <Content style={{ padding: '0 50px', marginTop: 64, }}>
     <Switch>
       <Route exact path="/">
-        <img src={img} alt='landscape' className="landscape" />
-        <PostList />
+        <PostList data={data} />
+      </Route>
+      <Route exact path="/:id">
+        <PostDetail data={data} />
       </Route>
     </Switch>
   </Content>

@@ -1,18 +1,15 @@
 
 import React from 'react';
-import {
-  BrowserRouter as Router,
-} from "react-router-dom";
-
+import { Layout } from 'antd';
 import Blog from './components/Blog';
 import 'antd/dist/antd.css';
 import './css/App.css';
 
 const App = () => (
   <div className="App">
-    <Router>
+    <Layout>
       <Blog />
-    </Router>
+    </Layout>
   </div>
 );
 
