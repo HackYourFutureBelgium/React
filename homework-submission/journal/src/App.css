@@ -1,7 +1,18 @@
 .App {
   text-align: center;
 }
-
+.menu {
+  margin: 10px 15px;
+  font-size:50px;
+  padding: 10px;
+}
+.home{
+  padding: 55px;
+}
+.form_container{
+  display: flex;
+  flex-flow: column nowrap;
+}
 .App-logo {
   height: 40vmin;
 }
