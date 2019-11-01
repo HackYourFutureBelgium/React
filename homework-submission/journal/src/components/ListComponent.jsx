@@ -1,21 +1,33 @@
-import React from 'react';
-import { ListGroup, Card } from 'react-bootstrap';
+import React, {useState, useEffect} from 'react';
+import { ListGroup, Container } from 'react-bootstrap';
 
-const ListComponent = ({fetchResults}) => {
+const ListComponent = () => {
+  const [fetchResults, setFetchResults] = useState(null);
+
+  useEffect(() => {
+    fetch(`http://142.93.51.96/posts`)
+      .then(response => response.json())
+      .then((result) => { 
+        setFetchResults(result);
+      })
+      .catch(err => console.log(err));
+  }, []);
+  if (!fetchResults) return <p>Error with the fetching</p>
+
   return ( 
-    <Card style={{ width: '28rem' }}>
-      <ListGroup>
+    <Container style={{ width: '28rem' , height:"28rem"}}>
         {fetchResults.map((activity) => {
           if (activity.title) {
             return (
-              <ListGroup.Item action href={activity.id} horizontal='sm' key={activity.id}>
-              {activity.title}
-              </ListGroup.Item>
+              <ListGroup>
+                <ListGroup.Item action href={activity.id}  key={activity.id}>
+                  {activity.title} 
+                </ListGroup.Item>
+              </ListGroup>
             )
           }
         })}
-      </ListGroup>
-  </Card>
+    </Container>
   );
 }
 

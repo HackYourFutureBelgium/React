@@ -9,10 +9,7 @@
 .home{
   padding: 55px;
 }
-.form_container{
-  display: flex;
-  flex-flow: column nowrap;
-}
+
 .App-logo {
   height: 40vmin;
 }

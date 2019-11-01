@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import { Card } from 'react-bootstrap';
+import { Container } from 'react-bootstrap';
 
 const CreateComponent = () => {
   const [title, setTitle] = useState('');
@@ -25,37 +25,46 @@ const CreateComponent = () => {
     if (dairy.title) {
       fetch('http://142.93.51.96/posts', {
         method: 'post',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
         body: JSON.stringify(dairy)
       });
     }
   };
 
   return ( 
-    <Card bg='primary' style={{ width: '28rem'}}>
+    <Container style={{ width: '28rem' , height:"28rem"}}>
       <form
-        className='form_container'
         onSubmit={handleSubmit}
       >
-        <label htmlFor="title">Title</label>
-        <input
-          id='title'
-          type='text'
-          placeholder='type your title'
-          value={title}
-          onChange={handleInputTitle}
-        />
-        <label htmlFor="content">Content</label>
-        <textarea
-          id='content'
-          type='text'
-          value={content}
-          placeholder='type your content'
-          cols='10' rows='10'
-          onChange={handleInputContent}
-        />
-        <input type='submit' value='Submit'/>
+        <div className="form-group">
+          <label htmlFor="title">Title</label>
+          <input
+            type="text"
+            className="form-control "
+            id="title"
+            placeholder="Enter Title"
+            value={title}
+            onChange={handleInputTitle}
+          />
+        </div>
+        <div className="form-group" >
+          <label htmlFor="content">Content</label>
+          <textarea
+            type="text"
+            className="form-control"
+            id="content"
+            placeholder="Type your content"
+            rows='10' cols='10'
+            onChange={handleInputContent}
+            value={content}
+          />
+        </div>
+      <button type="submit" className="btn btn-primary">Submit</button>
     </form>
-  </Card>
+  </Container>
   );
 }
 

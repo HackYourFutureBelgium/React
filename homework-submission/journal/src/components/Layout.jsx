@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import { Container, Row, Col } from 'react-bootstrap';
+import { Container, Row, Col } from 'antd';
 import CreateComponent from './CreateComponent';
 import DetailComponent from './DetailComponent'
 import ListComponent from './ListComponent';
@@ -12,39 +12,32 @@ import {
 } from "react-router-dom";
 
 const Layout = () => {
-  const [fetchResults, setFetchResults] = useState(null);
-
-  useEffect(() => {
-    fetch(`http://142.93.51.96/posts`)
-      .then(response => response.json())
-      .then((result) => { 
-        setFetchResults(result);
-      })
-      .catch(err => console.log(err));
-  }, []);
-  if (!fetchResults) return null;
-
   return ( 
-    <Container>
+    <div>
       <Router>
-        <Row>
-          <Col sm><Menu /></Col>
-        </Row>
-        <Row>
-          <Switch>
-            <Route path='/create' exact>
-              <CreateComponent fetchResults={fetchResults}/>
-            </Route>
-            <Route path='/:id' >
-              <DetailComponent fetchResults={fetchResults}/>
-            </Route>
-            <Route path='/' exact>
-              <ListComponent fetchResults={fetchResults}/>
-            </Route>
-          </Switch>
-        </Row>
-      </Router>
-    </Container>
+    <Row>
+      <Col span={24}><Menu /></Col>
+    </Row>
+    <Row>
+      <Col span={24}>
+        <Switch>
+          <Route path='/create' exact>
+            <CreateComponent />
+          </Route>
+          <Route path='/:id' >
+            <DetailComponent />
+          </Route>
+          <Route path='/' exact>
+            <ListComponent />
+          </Route>
+        </Switch>
+      </Col>
+    </Row>
+    <Row type="flex" justify="space-between" align="bottom">
+      <Col span={24}>By Berihu Gebremedhin @2019</Col>
+    </Row>
+  </Router>
+</div>
   );
 }
 
