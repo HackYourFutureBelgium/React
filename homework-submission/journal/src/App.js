@@ -1,7 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
-// import Menu from './Components/Menu';
 import CreateComponent from './Components/CreateComponent';
 import DetailComponent from './Components/DetailComponent';
 import ListComponent from './Components/ListComponent';
