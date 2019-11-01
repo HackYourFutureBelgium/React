@@ -1,12 +1,34 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+
+// import Menu from './Components/Menu';
+import CreateComponent from './Components/CreateComponent';
+import DetailComponent from './Components/DetailComponent';
+import ListComponent from './Components/ListComponent';
+import MenuComponent from './Components/MenuComponent';
+
 import 'antd/dist/antd.css';
+import './App.css';
 
 function App() {
   return (
     <div className="App">
-      card: <Card />
+      <Router>
+        <MenuComponent />
+        <Switch>
+          <Route path="/create" exact>
+            <CreateComponent />
+          </Route>
+
+          <Route path="/:id">
+            <DetailComponent />
+          </Route>
+
+          <Route path="/" exact>
+            <ListComponent />
+          </Route>
+        </Switch>
+      </Router>
     </div>
   );
 }

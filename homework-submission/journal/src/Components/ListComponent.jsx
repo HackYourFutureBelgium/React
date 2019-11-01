@@ -21,7 +21,7 @@ import { List, Avatar } from 'antd';
 // }
 
 function ListComponent() {
-  const [posts, setPosts] = useState([]);
+  const [posts, setPosts] = useState(0);
 
   useEffect(() => {
     axios
@@ -30,9 +30,7 @@ function ListComponent() {
         // console.log(res);
         setPosts(res.data);
       })
-      .catch(err => {
-        // console.log(err);
-      });
+      .catch(err => err);
   }, []);
 
   // const postItemss = posts.map(post => (
@@ -44,6 +42,7 @@ function ListComponent() {
   // ));
 
   const postItems = posts.map(post => post);
+
   console.log(postItems);
 
   return (
