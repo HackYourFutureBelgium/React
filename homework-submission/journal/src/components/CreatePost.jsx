@@ -24,7 +24,6 @@ const CreatePost =({ title, content })=> {
     });
   };
   
-
 return (
 <div style={{ background: '#ECECEC', paddingTop: '30px', paddingBottom: '30px' }}>
 <Card title="Create Post" bordered={false} 
