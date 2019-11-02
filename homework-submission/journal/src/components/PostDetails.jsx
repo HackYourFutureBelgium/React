@@ -22,7 +22,7 @@ const PostDetails = () => {
   return (
     <div style={{ background: '#ECECEC', padding: '30px' }}>
       <Card title={compenant.title} style={{ width: '50%',marginTop:'7%', marginLeft: 'auto', marginRight:'auto' }}>
-        <p>{compenant.title}</p>
+        <p>{compenant.content}</p>
       </Card>
     </div>
   );
