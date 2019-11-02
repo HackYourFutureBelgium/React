@@ -1,65 +1,66 @@
+import React, { useState } from 'react'
+import {
+  Form,
+  Input,
+  Button,
+  Card
+} from 'antd';
 
-import React, { useState, useEffect } from 'react';
-import { Form, Input, Button, Card } from 'antd';
+const CreatePost =({ title, content })=> {
+  const [newTitle, setNewTitle] = useState('')
+  const [newContent, setNewContent] = useState('')
+  const submit = (prop1, prop2) => {
+    fetch('http://142.93.51.96/posts', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        title: prop1,
+        content: prop2,
+      }),
+      
+    });
+  };
+  
 
-const CreatePost = () => {
-  const [newTitle, setNewTitle] = useState('');
-  const [newContent, setNewContent] = useState('');
-  const [submitForm, setSubmitForm] = useState(false);
-
-  useEffect((newTitle, newContent) => {
-    let url = 'http://142.93.51.96/posts';
-    if (submitForm === true) {
-      fetch(url, {
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
-        },
-        method: "POST",
-        body: JSON.stringify({ title: newTitle, content: newContent })
-      })
-        .then(res => res.json())
-        .then(response => {
-          console.log(response);
-        })
-    }
-  }, [submitForm]);
-
-  return (
-    <div style={{ background: '#ECECEC', padding: '30px' }}>
-      <Card style={{ width: '50%',marginTop:'7%', marginLeft: 'auto', marginRight:'auto' }}>
-      <div><h1><b><center>Create Post</center></b></h1></div>
-        <Form onSubmit={(event) => {
+return (
+<div style={{ background: '#ECECEC', paddingTop: '30px', paddingBottom: '30px' }}>
+<Card title="Create Post" bordered={false} 
+style={{ width: '70%', marginLeft: 'auto', marginRight: 'auto', marginTop: '75px'}}>
+  <Form onSubmit={event => {
+      event.preventDefault();
+      setNewTitle(title);
+      setNewContent(content);
+      submit(newTitle,newContent);
+    }} >
+    <Form.Item  >
+      <Input
+        type="text"
+        placeholder="Post Title"
+        value={newTitle} onChange={(event) => {
           event.preventDefault();
-          setSubmitForm(true);
-        }}>
-          <Form.Item  >
-            <Input
-              type="text"
-              placeholder="Post Title Here"
-              value={newTitle} onChange={(event) => {
-                event.preventDefault();
-                setNewTitle(event.target.value);
-              }}
-            />
-          </Form.Item>
-          <Form.Item  >
-            <Input.TextArea
-              type="textarea"
-              placeholder="Post Text Here"
-              value={newContent} onChange={(event) => {
-                event.preventDefault();
-                setNewContent(event.target.value);
-              }}
-            />
-          </Form.Item>
-          <Form.Item>
-            <Button type="primary" htmlType="submit" > Submit </Button>
-          </Form.Item >
-        </Form>
-      </Card>
-    </div >
-  )
-};
+          setNewTitle(event.target.value);
+        }}
+      />
+    </Form.Item>
+    <Form.Item  >
+      <Input.TextArea
+        type="textarea"
+        placeholder="Write your post"
+        value={newContent} onChange={(event) => {
+          event.preventDefault();
+          setNewContent(event.target.value);
+        }}
+      />
+    </Form.Item>
+    <Form.Item>
+      <Button type="submit" htmlType="submit" >Submit</Button>
+    </Form.Item >
+  </Form>
+</Card>
+</div >)
+}
 
-export default CreatePost;
+export default CreatePost
