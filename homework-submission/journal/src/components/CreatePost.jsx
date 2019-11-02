@@ -24,6 +24,10 @@ const CreatePost =({ title, content })=> {
     });
   };
   
+<<<<<<< HEAD
+=======
+
+>>>>>>> 744b329acf136416b2437febc0d460e04f0adc83
 return (
 <div style={{ background: '#ECECEC', paddingTop: '30px', paddingBottom: '30px' }}>
 <Card title="Create Post" bordered={false} 
