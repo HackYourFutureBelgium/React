@@ -10,7 +10,6 @@ const ListComponent = () => {
         const response = await fetch(`http://142.93.51.96/posts/`);
         const posts = await response.json();
         setListElement(posts);
-        console.log(posts);
       } catch (e) {
         setListElement({ error: true });
       }
