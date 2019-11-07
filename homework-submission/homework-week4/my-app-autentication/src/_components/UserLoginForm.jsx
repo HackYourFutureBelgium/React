@@ -15,7 +15,8 @@ class LoginForm extends React.Component {
 
       axios.post(`http://142.93.51.96/login`, { email, password })
         .then(res => {
-          this.props.setUser(res.data);
+          this.props.setUser({ token: res.data });
+
         })
     });
   };
@@ -32,8 +33,6 @@ class LoginForm extends React.Component {
     // Only show error after a field is touched.
     const emailError = isFieldTouched('email') && getFieldError('email');
     const passwordError = isFieldTouched('password') && getFieldError('password');
-
-
 
     return (
       < Form onSubmit={this.handleSubmit} className="login-form" >

@@ -5,7 +5,7 @@ const { Header } = Layout;
 
 let Page_Header = () => {
   return (
-    <Header>
+    <Header >
       <div className="logo" />
       <Menu
         theme="dark"
