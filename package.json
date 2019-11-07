@@ -10,6 +10,7 @@
     "test": "npm run lint"
   },
   "dependencies": {
+    "antd": "^3.24.2",
     "babel-eslint": "^8.2.3",
     "eslint": "^4.19.1",
     "eslint-config-react-app": "^2.1.0",
