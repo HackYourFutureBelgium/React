@@ -1,12 +1,30 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Nav, Navbar } from 'react-bootstrap';
+import {Icon} from 'antd'
 
 const Menu= () => {
   return ( 
-    <div className='menu'>
-      <span className='home'><Link to='/'>Home</Link></span> 
-      <span className='create'><Link to='/create'>Create</Link></span>
-    </div>
+    <Navbar bg="dark"  expand="xl" variant="dark">
+      <Navbar.Brand href="/">Journal app</Navbar.Brand>
+      <Nav className="mr-auto">
+          <Nav.Link href="/">
+          <Icon type="home" />
+            Home
+          </Nav.Link>
+          <Nav.Link href="/create">
+          <Icon type="plus-circle" />
+            Create
+          </Nav.Link>
+          <Nav.Link href="/register">
+            <Icon type="edit" />
+            Register
+          </Nav.Link>
+          <Nav.Link href="/logout">
+          <Icon type="logout" />
+            Logout
+          </Nav.Link>
+      </Nav>
+  </Navbar>
   );
 }
 

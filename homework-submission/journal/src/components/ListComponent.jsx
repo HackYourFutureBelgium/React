@@ -1,26 +1,27 @@
 import React, {useState, useEffect} from 'react';
 import { ListGroup, Container } from 'react-bootstrap';
+import { executeGetRequests } from '../helpers/auth';
+import { Icon } from 'antd';
 
-const ListComponent = () => {
+const ListComponent = ({setError}) => {
   const [fetchResults, setFetchResults] = useState(null);
 
   useEffect(() => {
-    fetch(`http://142.93.51.96/posts`)
-      .then(response => response.json())
-      .then((result) => { 
-        setFetchResults(result);
-      })
-      .catch(err => console.log(err));
-  }, []);
-  if (!fetchResults) return <p>Error with the fetching</p>
+    executeGetRequests('/posts',
+      data => setFetchResults(data),
+      err=>setError(err))
+  }, [])
 
+console.log(fetchResults)
+
+  if(!fetchResults ) return <Icon type="loading" />
   return ( 
-    <Container style={{ width: '28rem' , height:"28rem"}}>
+    <Container style={{ width: '28rem' , height:"28rem", padding:"2rem"}}>
         {fetchResults.map((activity) => {
           if (activity.title) {
             return (
-              <ListGroup>
-                <ListGroup.Item action href={activity.id}  key={activity.id}>
+              <ListGroup key={activity.id}>
+                <ListGroup.Item action href={activity.id}  >
                   {activity.title} 
                 </ListGroup.Item>
               </ListGroup>

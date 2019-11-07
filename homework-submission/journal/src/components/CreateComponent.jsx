@@ -1,7 +1,8 @@
 import React, {useState} from 'react';
 import { Container } from 'react-bootstrap';
+import axios from  'axios'
 
-const CreateComponent = () => {
+const CreateComponent = ({setError}) => {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
 
@@ -17,25 +18,19 @@ const CreateComponent = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const dairy = {
-      title: title,
-      content: content
-    };
 
-    if (dairy.title) {
-      fetch('http://142.93.51.96/posts', {
-        method: 'post',
+      axios.post('http://142.93.51.96/posts', { title, content },
+        {
         headers: {
-          Accept: 'application/json',
+          Authorization: `Bearer:${localStorage.getItem('token')}`,
           'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(dairy)
-      });
-    }
+        }
+        })
+        .catch(err =>setError(err));
   };
 
   return ( 
-    <Container style={{ width: '28rem' , height:"28rem"}}>
+    <Container style={{ width: '28rem' , height:"28rem", padding:"2rem"}}>
       <form
         onSubmit={handleSubmit}
       >
@@ -43,7 +38,8 @@ const CreateComponent = () => {
           <label htmlFor="title">Title</label>
           <input
             type="text"
-            className="form-control "
+            required
+            className="form-control"
             id="title"
             placeholder="Enter Title"
             value={title}
