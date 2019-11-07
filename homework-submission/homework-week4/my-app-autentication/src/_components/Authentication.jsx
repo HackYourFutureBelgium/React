@@ -6,16 +6,19 @@ let Authentication = ({ children }) => {
 
   useEffect(() => {
     let login = JSON.parse(localStorage.getItem('userValueInLocalStorage'));
-    // Change State the fist time in the site and when the users doesn't has session.
+    // Change State the fist time in the site and when the users doesn't have session.
     if (login === null || login.token === null)
       localStorage.setItem('userValueInLocalStorage', JSON.stringify(user));
   }, [user]);
 
   let login = JSON.parse(localStorage.getItem('userValueInLocalStorage'));
-  if (user.token === null && login === null)
+  if (user.token === null && (login === null || login.token === null))
     return <UserLogin setUser={setUser} />;
-  else
+  else {
+    console.log(user.token === null);
+    console.log(login);
     return children;
+  }
 }
 
 export default Authentication;
