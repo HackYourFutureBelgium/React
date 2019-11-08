@@ -7,6 +7,12 @@ function hasErrors(fieldsError) {
 }
 
 class LoginForm extends React.Component {
+
+  constructor(props) {
+    super(props);
+    this.state = { loading: 0, iconLoading: 0 };
+  }
+
   handleSubmit = e => {
     e.preventDefault();
     this.props.form.validateFields((err, values) => {
@@ -22,7 +28,7 @@ class LoginForm extends React.Component {
         .then(res => {
           this.props.setNewPosts(res.data);
         })
-        .catch(err => console.log(err))
+        .catch(err => this.setState({ loading: 0, iconLoading: 0 }))
     });
   };
 
@@ -30,6 +36,14 @@ class LoginForm extends React.Component {
     // To disabled submit button at the beginning.
     this.props.form.validateFields();
   }
+
+  enterLoading = () => {
+    this.setState({ loading: true });
+  };
+
+  enterIconLoading = () => {
+    this.setState({ iconLoading: true });
+  };
 
 
   render() {
@@ -59,8 +73,12 @@ class LoginForm extends React.Component {
         </Form.Item>
         <Form.Item>
           <Button type="primary" htmlType="submit" className="login-form-button"
-            disabled={hasErrors(getFieldsError())}>
-            Add
+            disabled={hasErrors(getFieldsError())}
+            icon="poweroff"
+            loading={this.state.iconLoading}
+            onClick={this.enterIconLoading}
+          >
+            Add New Post
           </Button>
         </Form.Item>
       </Form >

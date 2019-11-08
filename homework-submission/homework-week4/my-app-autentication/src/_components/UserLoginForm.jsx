@@ -10,7 +10,7 @@ class LoginForm extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = { error: 0 };
+    this.state = { error: 0, loading: 0, iconLoading: 0 };
   }
 
   handleSubmit = e => {
@@ -23,7 +23,7 @@ class LoginForm extends React.Component {
         .then(res => {
           this.props.setUser({ token: res.data });
         })
-        .catch(err => this.setState({ error: 1 }))
+        .catch(err => this.setState({ error: 1, loading: 0, iconLoading: 0 }))
     });
   };
 
@@ -32,6 +32,13 @@ class LoginForm extends React.Component {
     this.props.form.validateFields();
   }
 
+  enterLoading = () => {
+    this.setState({ loading: true });
+  };
+
+  enterIconLoading = () => {
+    this.setState({ iconLoading: true });
+  };
 
   render() {
     const { getFieldDecorator, getFieldsError, getFieldError, isFieldTouched } = this.props.form;
@@ -48,6 +55,7 @@ class LoginForm extends React.Component {
               message="Error, Check your e-mail or password." type="error" showIcon
             /> : null
         }
+
         < Form onSubmit={this.handleSubmit} className="login-form" >
           <Form.Item validateStatus={emailError ? 'error' : ''} >
             {getFieldDecorator('email', {
@@ -79,12 +87,17 @@ class LoginForm extends React.Component {
           </Form.Item>
           <Form.Item>
             <Button type="primary" htmlType="submit" className="login-form-button"
-              disabled={hasErrors(getFieldsError())}>
+              disabled={hasErrors(getFieldsError())}
+              icon="poweroff"
+              loading={this.state.iconLoading}
+              onClick={this.enterIconLoading}
+            >
               Log in
           </Button>
             Or <a href=".">register now!</a>
           </Form.Item>
         </Form >
+
       </>
     );
   }
