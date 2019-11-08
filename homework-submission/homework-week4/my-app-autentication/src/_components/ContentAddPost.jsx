@@ -6,7 +6,7 @@ import ContentShowPost from './ContentShowPost';
 const ContentAddPost = () => {
   const [newPosts, setNewPosts] = useState(null);
   return (
-    <Card title="Add Post" style={{ width: '40%', marginLeft: 'auto', marginRight: 'auto' }}>
+    <Card title="Complete the fields to add the new Post" style={{ width: '40%', marginLeft: 'auto', marginRight: 'auto' }}>
       {
         newPosts === null ?
           < ContentAddPostForm setNewPosts={setNewPosts} /> :
