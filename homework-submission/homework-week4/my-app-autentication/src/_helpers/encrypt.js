@@ -26,7 +26,3 @@ let SecureStorageHYFPost = new SecureStorage(localStorage, {
 });
 
 export default SecureStorageHYFPost;
-
-//secureStorage.setItem('data', data);
-//var decryptedData = secureStorage.getItem('data');
-// removes the entry 'data'
