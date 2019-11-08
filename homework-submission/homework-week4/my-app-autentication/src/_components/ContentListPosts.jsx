@@ -15,7 +15,7 @@ const ContentListPosts = () => {
 
     axios.get('http://142.93.51.96/posts', options)
       .then(response => setPosts({ loading: 1, result: response.data }))
-      .catch(error => console.log(error + 'unos'))
+      .catch(error => console.log(error))
   }
 
   return (

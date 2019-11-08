@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import { Form, Icon, Input, Button } from 'antd';
+import { Form, Input, Button } from 'antd';
 
 function hasErrors(fieldsError) {
   return Object.keys(fieldsError).some(field => fieldsError[field]);
@@ -10,14 +10,19 @@ class LoginForm extends React.Component {
   handleSubmit = e => {
     e.preventDefault();
     this.props.form.validateFields((err, values) => {
-      const email = values.email;
-      const password = values.password;
+      const title = values.title;
+      const content = values.description;
 
-      axios.post(`http://142.93.51.96/login`, { email, password })
+      let login = JSON.parse(localStorage.getItem('userValueInLocalStorage'));
+      const options = {
+        headers: { 'Authorization': login.token }
+      };
+
+      axios.post(`http://142.93.51.96/posts`, { title, content }, options)
         .then(res => {
-          this.props.setUser({ token: res.data });
-
+          this.props.setNewPosts(res.data);
         })
+        .catch(err => console.log(err))
     });
   };
 
@@ -31,45 +36,32 @@ class LoginForm extends React.Component {
     const { getFieldDecorator, getFieldsError, getFieldError, isFieldTouched } = this.props.form;
 
     // Only show error after a field is touched.
-    const emailError = isFieldTouched('email') && getFieldError('email');
-    const passwordError = isFieldTouched('password') && getFieldError('password');
+    const titleError = isFieldTouched('title') && getFieldError('title');
+    const descriptionError = isFieldTouched('description') && getFieldError('description');
 
     return (
       < Form onSubmit={this.handleSubmit} className="login-form" >
-        <Form.Item validateStatus={emailError ? 'error' : ''} >
-          {getFieldDecorator('email', {
-            rules: [
-              {
-                type: 'email',
-                message: 'The input is not valid E-mail!',
-              },
-              {
-                required: true,
-                message: 'Please!, input your E-mail!',
-              },
-            ],
-          })(<Input
-            prefix={<Icon type="mail" style={{ color: 'rgba(0,0,0,.25)' }} />}
-            type="email"
-            placeholder="E-mail" />)}
-        </Form.Item>
-        <Form.Item validateStatus={passwordError ? 'error' : ''}>
-          {getFieldDecorator('password', {
-            rules: [{ required: true, message: 'Please!, input your Password!' }],
+        <Form.Item validateStatus={titleError ? 'error' : ''}>
+          {getFieldDecorator('title', {
+            rules: [{ required: true, message: 'Please!, input a Title!' }],
           })(
             <Input
-              prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
-              type="password"
-              placeholder="Password"
-            />,
-          )}
+              type="text"
+              placeholder="Title" />)}
+        </Form.Item>
+        <Form.Item validateStatus={descriptionError ? 'error' : ''}>
+          {getFieldDecorator('description', {
+            rules: [{ required: true, message: 'Please!, input a Description!' }],
+          })(
+            <Input.TextArea
+              type="text"
+              placeholder="Description" />)}
         </Form.Item>
         <Form.Item>
           <Button type="primary" htmlType="submit" className="login-form-button"
             disabled={hasErrors(getFieldsError())}>
-            Log in
+            Add
           </Button>
-          Or <a href=".">register now!</a>
         </Form.Item>
       </Form >
     );
