@@ -1,35 +1,15 @@
-import React, { useState, useEffect } from 'react';
-import { Container, Form , Button, Row, Col} from 'react-bootstrap';
+import React, { useState } from 'react';
+import { Container } from 'react-bootstrap';
 import Axios from 'axios';
 import { Redirect } from 'react-router';
+import useForm from 'react-hook-form';
 
-const LoginComponent = ({setError}) => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+const LoginComponent = () => {
   const [loggedIn, setLoggedIn] = useState(false);
-  const [validated, setValidated] = useState(false);
+  const [error, setError] = useState(false);
+  const { register, handleSubmit, errors } = useForm();
 
-  const handleInputEmail = (event) => {
-    event.preventDefault();
-    setEmail(event.target.value);
-  };
-
-  const handleInputPassword = (event) => {
-    event.preventDefault();
-    setPassword(event.target.value);
-  };
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-
-    const form = event.currentTarget;
-    if (form.checkValidity() === false) {
-      event.preventDefault();
-      event.stopPropagation();
-    } 
-    setValidated(true);
-
-    if (validated) {
+  const OnSubmit = ({email, password}) => {
       Axios
         .post(`http://142.93.51.96/login`, { email, password })
         .then((e) => {
@@ -41,49 +21,77 @@ const LoginComponent = ({setError}) => {
             setLoggedIn(false)
           }
         })
-        .catch(err => setError(err));
-    }
+      .catch(err => setError(err));
+    
+    if (error) alert('incorrect username or password');
   };
 
   return ( 
-    <Container style={{ width: '28rem' , height:"28rem", padding:"2rem"}}>
-      {
-        loggedIn ?
-          <Redirect to="/" />
-          :
-          <Form noValidate validated={validated} onSubmit={handleSubmit}>
-            <Form.Group as={Row} controlId="formBasicEmail">
-              <Form.Label column sm="2" >Email address</Form.Label>
-              <Col sm="10">
-              <Form.Control
-                required
-                type="email" 
-                placeholder="Enter email" 
-                value={email}
-                onChange={handleInputEmail}
-                />
-                <Form.Control.Feedback>looks good</Form.Control.Feedback>
-                </Col>
-            </Form.Group>
+    <Container style={{ width: '28rem', height: "28rem", padding: "2rem" }}>
+      {loggedIn ? <Redirect to='/' /> :
+        <div className="container h-100">
+          <div className="d-flex justify-content-center h-100">
+            <div className="user_card">
+              <div className="d-flex justify-content-center">
+                <div className="brand_logo_container">
+                  <img src="https://cdn.freebiesupply.com/logos/large/2x/pinterest-circle-logo-png-transparent.png"
+                    className="brand_logo" alt="Logo" />
+                </div>
+              </div>
+              <div className="d-flex justify-content-center form_container">
+                <form
+                  onSubmit={handleSubmit(OnSubmit)}
+                >
+                  <div className="input-group mb-3">
+                    <div className="input-group-append">
+                      <span className="input-group-text"><i className="fas fa-user"></i></span>
+                    </div>
+                    <input
+                      type="text"
+                      name="email"
+                      className="form-control input_user"
+                      placeholder="username"
+                      ref={register({
+                        required: 'Required',
+                        pattern: {
+                          value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
+                          message: "invalid email address"
+                        }
+                      })}
+                    />
+                    {errors.email && errors.email.message}
+                  </div>
+                  <div className="input-group mb-2">
+                    <div className="input-group-append">
+                      <span className="input-group-text"><i className="fas fa-key"></i></span>
+                    </div>
+                    <input
+                      type="password"
+                      name="password"
+                      className="form-control input_pass"
+                      placeholder="password"
+                      ref={register({ required: true })}
+                    />
+                    {errors.password && errors.password.type === 'required' && (
+                      <p>required</p>
+                    )}
+                  </div>
 
-            <Form.Group as={Row} controlId="formBasicPassword">
-              <Form.Label column sm="2">Password</Form.Label>
-              <Col sm="10">
-              <Form.Control
-                required
-                type="password" 
-                placeholder="Password" 
-                onChange={handleInputPassword}
-                value={password}
-                />
-                <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
-                </Col>
-            </Form.Group>
-
-            <Button variant="primary" type="submit">
-              Login
-            </Button>
-          </Form> 
+                  <div className="d-flex justify-content-center mt-3 login_container">
+                    <button type="submit" name="button" className="btn login_btn">Login</button>
+                  </div>
+                </form>
+              </div>
+        
+              <div className="mt-4">
+                <div className="d-flex justify-content-center links">
+                  Don't have an account? <a href="/register" className="ml-2">Sign Up</a>
+                </div>
+              </div>
+            
+            </div>
+          </div>
+        </div>
       }
     </Container>
   );

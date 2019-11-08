@@ -12,8 +12,6 @@ const ListComponent = ({setError}) => {
       err=>setError(err))
   }, [])
 
-console.log(fetchResults)
-
   if(!fetchResults ) return <Icon type="loading" />
   return ( 
     <Container style={{ width: '28rem' , height:"28rem", padding:"2rem"}}>

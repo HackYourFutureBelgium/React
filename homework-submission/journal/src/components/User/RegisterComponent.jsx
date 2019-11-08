@@ -45,6 +45,7 @@ const RegisterComponent = ({setError}) => {
       Axios
         .post(`http://142.93.51.96/register`, { email, firstName, lastName,password })
         .then((e) => {
+          console.log(e)
           //TODO : add error handling
           if (e.data) {
             localStorage.setItem('token', e.data);
