@@ -16,6 +16,7 @@ class LoginForm extends React.Component {
       axios.post(`http://142.93.51.96/login`, { email, password })
         .then(res => {
           this.props.setUser({ token: res.data });
+
         })
     });
   };

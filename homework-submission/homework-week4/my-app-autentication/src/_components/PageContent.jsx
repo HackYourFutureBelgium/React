@@ -1,9 +1,8 @@
 import React from 'react';
-import {
-  Switch,
-  Route
-} from 'react-router-dom';
+import { Switch, Route } from 'react-router-dom';
 import { Layout } from 'antd';
+import ContentListPosts from './ContentListPosts';
+import ContentAddPost from './ContentAddPost';
 const { Content } = Layout;
 
 let PageConent = () => {
@@ -12,10 +11,10 @@ let PageConent = () => {
     <Content style={{ padding: '50px 50px' }}>
       <Switch>
         <Route exact path="/">
-          <div style={{ background: '#fff', padding: 24, minHeight: 280 }}> The Home  </div>
+          <ContentListPosts />
         </Route>
         <Route exact path="/add">
-          <div style={{ background: '#fff', padding: 24, minHeight: 280 }}>This is add Post</div>
+          <ContentAddPost />
         </Route>
       </Switch>
     </Content >

@@ -1,6 +1,5 @@
 import React from 'react';
-import { Layout } from 'antd';
-import { Card } from 'antd';
+import { Layout, Card } from 'antd';
 import UserLoginForm from './UserLoginForm';
 import PageFooter from './PageFooter';
 const { Header, Content } = Layout;

@@ -6,7 +6,6 @@ const { Header } = Layout;
 let Page_Header = () => {
   return (
     <Header >
-      <div className="logo" />
       <Menu
         theme="dark"
         mode="horizontal"
