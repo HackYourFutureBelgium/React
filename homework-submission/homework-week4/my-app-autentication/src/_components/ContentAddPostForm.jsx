@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import { Form, Input, Button } from 'antd';
+import SecureStorageHYFPost from '../_helpers/Encrypt.js'
 
 function hasErrors(fieldsError) {
   return Object.keys(fieldsError).some(field => fieldsError[field]);
@@ -19,7 +20,7 @@ class LoginForm extends React.Component {
       const title = values.title;
       const content = values.description;
 
-      let login = JSON.parse(localStorage.getItem('userValueInLocalStorage'));
+      let login = SecureStorageHYFPost.getItem('userValueInLocalStorage');
       const options = {
         headers: { 'Authorization': login.token }
       };

@@ -1,5 +1,5 @@
-import SecureStorage from 'SecureStorage';
-import CryptoJS from 'crypto-js';
+import SecureStorage from 'secure-web-storage';
+var CryptoJS = require("crypto-js");
 
 let SECRET_KEY = 'hackyourfuture';
 

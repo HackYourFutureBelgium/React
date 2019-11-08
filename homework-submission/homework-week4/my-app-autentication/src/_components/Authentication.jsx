@@ -1,15 +1,16 @@
 import React, { useState } from 'react';
 import UserLogin from './UserLogin';
+import SecureStorageHYFPost from '../_helpers/Encrypt.js'
 
 let Authentication = ({ children }) => {
   let [user, setUser] = useState({ token: null });
-  let login = JSON.parse(localStorage.getItem('userValueInLocalStorage'));
+  let login = SecureStorageHYFPost.getItem('userValueInLocalStorage');
 
   if (user.token === null && (login === null || login.token === null))
     return <UserLogin setUser={setUser} />;
   else {
     if (login === null)
-      localStorage.setItem('userValueInLocalStorage', JSON.stringify(user));
+      SecureStorageHYFPost.setItem('userValueInLocalStorage', user);
     return children;
   }
 }

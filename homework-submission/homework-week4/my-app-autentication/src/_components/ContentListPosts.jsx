@@ -3,12 +3,13 @@ import axios from 'axios';
 import { List, Avatar } from 'antd';
 import img from '../_assets/developer.jpg';
 import landscape from '../_assets/landscape.jpg';
+import SecureStorageHYFPost from '../_helpers/Encrypt.js'
 
 const ContentListPosts = () => {
   const [posts, setPosts] = useState({ loading: 0, result: [] });
 
   if (posts.loading === 0) {
-    let login = JSON.parse(localStorage.getItem('userValueInLocalStorage'));
+    let login = SecureStorageHYFPost.getItem('userValueInLocalStorage');
     const options = {
       headers: { 'Authorization': login.token }
     };
@@ -24,9 +25,7 @@ const ContentListPosts = () => {
       <List style={{ backgroundColor: 'white' }}
         itemLayout="horizontal"
         pagination={{
-          onChange: page => {
-            console.log(page);
-          },
+          onChange: page => { },
           pageSize: 3,
         }}
         dataSource={posts.result}
