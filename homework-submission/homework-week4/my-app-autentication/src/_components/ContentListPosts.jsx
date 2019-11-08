@@ -23,9 +23,15 @@ const ContentListPosts = () => {
       <img src={landscape} alt='landscape' className="landscape" />
       <List style={{ backgroundColor: 'white' }}
         itemLayout="horizontal"
+        pagination={{
+          onChange: page => {
+            console.log(page);
+          },
+          pageSize: 3,
+        }}
         dataSource={posts.result}
         renderItem={item => (
-          <List.Item>
+          <List.Item style={{ marginLeft: '5%' }}>
             <List.Item.Meta
               avatar={<Avatar src={img} />}
               title={item.title}
