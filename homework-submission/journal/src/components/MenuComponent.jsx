@@ -15,11 +15,17 @@ const MenuComponent = () => {
           </span>
         }
       >
-        <Menu.Item key="1">
+        <Menu.Item key="home">
           <Link to="/">Home</Link>
         </Menu.Item>
-        <Menu.Item key="2">
+        <Menu.Item key="create">
           <Link to="/create">Create</Link>
+        </Menu.Item>
+        <Menu.Item key="register">
+          <Link to="/register">Create</Link>
+        </Menu.Item>
+        <Menu.Item key="logout">
+          <Link to="/create">Log Out</Link>
         </Menu.Item>
       </SubMenu>
     </Menu>

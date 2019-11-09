@@ -1,23 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router';
 import { Card } from 'antd';
+import { executeGetRequest } from '../helpers/auth';
 
-const DetailComponent = () => {
+const DetailComponent = ({ setError }) => {
   const { id } = useParams();
-  const [detail, setDetail] = useState(0);
+  const [detail, setDetail] = useState([]);
 
   useEffect(() => {
-    const getDetails = async () => {
-      try {
-        const response = await fetch(`http://142.93.51.96/posts/${id}`);
-        const posts = await response.json();
-        setDetail(posts[0]);
-      } catch (e) {
-        setDetail({ error: true });
-      }
-    };
-    getDetails();
-  }, []);
+    executeGetRequest(`/posts/${id}`, data => {
+      setDetail(data[0]);
+    });
+    return () => {};
+  });
 
   return (
     <div style={{ background: '#ECECEC', padding: '30px' }}>

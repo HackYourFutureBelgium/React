@@ -1,21 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { List } from 'antd';
+import { executeGetRequest } from '../helpers/auth';
 
-const ListComponent = () => {
+const ListComponent = ({ setError }) => {
   const [listElement, setListElement] = useState([]);
 
   useEffect(() => {
-    const getPosts = async () => {
-      try {
-        const response = await fetch(`http://142.93.51.96/posts/`);
-        const posts = await response.json();
-        setListElement(posts);
-      } catch (e) {
-        setListElement({ error: true });
-      }
-    };
-    getPosts();
-  }, []);
+    executeGetRequest('/posts', data => {
+      setListElement(data);
+    });
+    return () => {};
+  });
 
   return (
     <div>
