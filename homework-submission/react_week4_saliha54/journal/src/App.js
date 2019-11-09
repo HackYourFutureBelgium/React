@@ -8,13 +8,31 @@ import './App.css';
 import Home from './Home.jsx';
 import Details from './Details.jsx';
 import Create from './Create.jsx';
+import ErrorPage from './ErrorPage.jsx';
+import AuthConnect from './AuthConnect.jsx';
+import Login from './Login.jsx';
+import Register from './Register.jsx';
+
+let error = {
+  title: 'error 1',
+  description: 'there was a problem',
+};
 
 function App() {
   return (
     <div className="App">
       <Router>
-        <div className="elements">
-          <Switch>
+        <Switch>
+          <Route exact path="/login">
+            <Login />
+          </Route>
+          <Route exact path="/register">
+            <Register />
+          </Route>
+          <Route exact path="/error">
+            <ErrorPage />
+          </Route>
+          <AuthConnect>
             <Route exact path="/">
               <Home data={data} />
             </Route>
@@ -24,8 +42,8 @@ function App() {
             <Route path="/:id">
               <Details data={data} />
             </Route>
-          </Switch>
-        </div>
+          </AuthConnect>
+        </Switch>
       </Router>
     </div>
   );
