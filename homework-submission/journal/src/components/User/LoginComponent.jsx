@@ -3,6 +3,7 @@ import { Container } from 'react-bootstrap';
 import Axios from 'axios';
 import { Redirect } from 'react-router';
 import useForm from 'react-hook-form';
+import logo from './hyf.jpg'
 
 const LoginComponent = () => {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -34,7 +35,7 @@ const LoginComponent = () => {
             <div className="user_card">
               <div className="d-flex justify-content-center">
                 <div className="brand_logo_container">
-                  <img src="https://cdn.freebiesupply.com/logos/large/2x/pinterest-circle-logo-png-transparent.png"
+                  <img src={logo}
                     className="brand_logo" alt="Logo" />
                 </div>
               </div>

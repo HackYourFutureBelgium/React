@@ -1,47 +1,17 @@
 import React, { useState } from 'react';
-import { Container, Form, Button, Col,Row } from 'react-bootstrap';
+import { Container} from 'react-bootstrap';
 import Axios from 'axios';
 import {Redirect} from 'react-router'
+import useForm from 'react-hook-form';
+import logo from './hyf.jpg'
 
-const RegisterComponent = ({setError}) => {
-  const [firstName, setFirstName] = useState(null);
-  const [lastName, setLastName] = useState(null);
-  const [email, setEmail] = useState(null);
-  const [password, setPassword]=useState(null)
+const RegisterComponent = () => {
   const [signUp, setSignUp] = useState(false);
-  const [validated, setValidated] = useState(false);
+  const [error, setError] = useState(false);
+  const { register, handleSubmit, errors } = useForm();
 
-  const handleInputPassword = (event) => {
-    event.preventDefault();
-    setPassword(event.target.value);
-  };
-
-  const handleInputEmail= (event) => {
-    event.preventDefault();
-    setEmail(event.target.value);
-  };
-
-  const handleInputFirstName = (event) => {
-    event.preventDefault();
-    setFirstName(event.target.value);
-  };
-
-  const handleInputLastName = (event) => {
-    event.preventDefault();
-    setLastName(event.target.value);
-  };
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-
-    const form = event.currentTarget;
-    if (form.checkValidity() === false) {
-      event.preventDefault();
-      event.stopPropagation();
-    } 
-    setValidated(true);
-
-    if (validated) {
+  const OnSubmit = ({email,firstName, lastName,password}) => {
+    console.log(email,firstName, lastName,password);
       Axios
         .post(`http://142.93.51.96/register`, { email, firstName, lastName,password })
         .then((e) => {
@@ -55,79 +25,110 @@ const RegisterComponent = ({setError}) => {
           }
         })
         .catch(err => setError(err));
-    }
+
+        if (error) alert('email already exist or incorrect form');
   };
   return (
-    <Container style={{ width: '28rem' , height:"28rem", padding:"2rem"}}>
-      {
-        signUp ?
-          <Redirect to="/login" />
-          :
-          <Form noValidate validated={validated} onSubmit={handleSubmit}>
-            <Form.Group as={Row} controlId="formBasicEmail">
-              <Form.Label column sm="2">Email address</Form.Label>
-              <Col sm="10">
-              <Form.Control
-                required
-                type="email" 
-                placeholder="dani@gmail.com" 
-                value={email}
-                onChange={handleInputEmail}
-                />
-                <Form.Control.Feedback>looks good</Form.Control.Feedback>
-                </Col>
-            </Form.Group>
-            <Form.Group as={Row} controlId="formBasicFirstName">
-              <Form.Label column sm="2">FirstName</Form.Label>
-              <Col sm="10">
-              <Form.Control
-                required
-                type="text" 
-                placeholder="dani" 
-                onChange={handleInputFirstName}
-                value={firstName}
-                />
-                <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
-                </Col>
-            </Form.Group>
-            <Form.Group  as={Row} controlId="formBasicLastName">
-              <Form.Label column sm="2">
-                LastName
-              </Form.Label>
-              <Col sm="10">
-              <Form.Control
-                required
-                type="text" 
-                placeholder="gebre" 
-                onChange={handleInputLastName}
-                value={lastName}
-                />
-                <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
-                </Col>
-            </Form.Group>
-            <Form.Group as={Row} controlId="formPlaintextPassword">
-              <Form.Label column sm="2">
-                Password
-              </Form.Label>
-              <Col sm="10">
-              <Form.Control
-                required
-                type="password" 
-                placeholder="Password" 
-                onChange={handleInputPassword}
-                value={password}
-                />
-            <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
-              </Col>
-            </Form.Group>
-            <Button variant="primary" type="submit">
-              Sign Up
-            </Button>
-          </Form> 
+    <Container style={{ width: '28rem', height: "28rem", padding: "2rem" }}>
+      { signUp ? <Redirect to="/login" /> :
+        <div className="container h-100">
+        <div className="d-flex justify-content-center h-100">
+          <div className="user_card">
+            <div className="d-flex justify-content-center">
+              <div className="brand_logo_container">
+                <img src={logo}
+                  className="brand_logo" alt="Logo" />
+              </div>
+            </div>
+            <div className="d-flex justify-content-center form_container">
+              <form
+                onSubmit={handleSubmit(OnSubmit)}
+              >
+                <div className="input-group mb-2">
+                  <div className="input-group-append">
+                    <span className="input-group-text"><i className="fas fa-user"></i></span>
+                  </div>
+                  <input
+                    type="text"
+                    name="firstName"
+                    className="form-control input_pass"
+                    placeholder="First Name"
+                    ref={register({ required: true })}
+                  />
+                  {errors.firstName && errors.firstName.type === 'required' && (
+                    <p>required</p>
+                  )}
+                </div>
+
+                <div className="input-group mb-2">
+                  <div className="input-group-append">
+                    <span className="input-group-text"><i className="fas fa-user"></i></span>
+                  </div>
+                  <input
+                    type="text"
+                    name="lastName"
+                    className="form-control input_pass"
+                    placeholder="Last Name"
+                    ref={register({ required: true })}
+                  />
+                  {errors.lastName && errors.lastName.type === 'required' && (
+                    <p>required</p>
+                  )}
+                </div>
+
+                <div className="input-group mb-3">
+                  <div className="input-group-append">
+                    <span className="input-group-text"><i className="fas fa-envelope"></i></span>
+                  </div>
+                  <input
+                    type="text"
+                    name="email"
+                    className="form-control input_user"
+                    placeholder="email"
+                    ref={register({
+                      required: 'Required',
+                      pattern: {
+                        value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
+                        message: "invalid email address"
+                      }
+                    })}
+                  />
+                  {errors.email && errors.email.message}
+                </div>
+
+                <div className="input-group mb-2">
+                  <div className="input-group-append">
+                    <span className="input-group-text"><i className="fas fa-key"></i></span>
+                  </div>
+                  <input
+                    type="password"
+                    name="password"
+                    className="form-control input_pass"
+                    placeholder="password"
+                    ref={register({ required: true })}
+                  />
+                  {errors.password && errors.password.type === 'required' && (
+                    <p>required</p>
+                  )}
+                </div>
+
+                <div className="d-flex justify-content-center mt-3 login_container">
+                  <button type="submit" name="button" className="btn login_btn">Sign Up</button>
+                </div>
+            </form>
+          </div>
+
+            <div className="mt-4">
+              <div className="d-flex justify-content-center links">
+                Already have an account? <a href="/login" className="ml-2">Login</a>
+              </div>
+            </div>
+            </div>
+          </div>
+        </div>
       }
     </Container>
-
   );
 }
- 
+
 export default RegisterComponent;
