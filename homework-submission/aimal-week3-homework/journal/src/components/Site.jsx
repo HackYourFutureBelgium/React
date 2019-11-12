@@ -7,6 +7,7 @@ import {
 
 import PageHeader from './PageHeader'
 import PageContent from './PageContent'
+import FooterContent from './FooterContent'
 
 const { Footer } = Layout;
 
@@ -16,10 +17,8 @@ function Site() {
    <Layout>
        <Router>
          <PageHeader />
-
-
-       <PageContent />
-      <Footer>Footer</Footer>
+         <PageContent />
+      <Footer> <FooterContent /></Footer>
       </Router>
    </Layout>
    
