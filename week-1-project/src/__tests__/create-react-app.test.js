@@ -1,5 +1,6 @@
 import React from 'react';
 import {Import, optionalChaining} from '../create-react-app';
+import * as AllObjects from '../create-react-app';
 import '../create-react-app.css';
 
 // The goal of these tests is to familiarize you with create-react-app
@@ -27,7 +28,7 @@ test('Writing tests', () => {
   };
 
   // Fix this assert statement and validate that the test is running
-  expect(multiply(2,3)).toEqual(false);
+  expect(multiply(2,3)).toEqual(6);
 });
 
 test('Exports & Imports: exporting objects', () => {
