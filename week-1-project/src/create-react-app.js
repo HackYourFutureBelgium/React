@@ -4,4 +4,6 @@ const optionalChaining = (object) => {
     return object?.bar?.buzz;
 };
 
-export { optionalChaining };
+const Import = {};
+
+export { Import, optionalChaining };
