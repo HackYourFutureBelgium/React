@@ -31,5 +31,10 @@
       "last 1 safari version"
     ]
   },
-  "homepage": "https://<username>.github.io/React/week-1-project/build/"
+  "homepage": "https://<username>.github.io/React/week-1-project/build/",
+  "description": "The exercises are guided by [tests](./src/__tests__).\r Each exercise has an associated test that will explain what is expected.\r Some tests you require you to fix an assertion others require you to fix something in the associated `.js` file.",
+  "main": "index.js",
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
 }

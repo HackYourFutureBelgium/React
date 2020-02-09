@@ -5,7 +5,9 @@ function App() {
     return (
         <section>
             <h1>The Example App</h1>
-            <NewsArticle />
+             <div>
+             <NewsArticle/>  
+             </div>
             <p>
                 Renders the value of a variable: <span>{result}</span>
             </p>
@@ -21,5 +23,18 @@ function NewsArticle() {
         </article>
     )
 }
+function MyApp(){
+    const articles = [];
+    for (let i=0; i<200; i++){
+        articles.push(<NewsArticle />);
+    }
+    return (
+        <div>
+            <h1>My First React App</h1>
+            {articles}
+        </div>
+   )
+}
 
 export { App };
+export {MyApp};
