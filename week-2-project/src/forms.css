@@ -1,0 +1,7 @@
+form div.field label {
+    font-weight: bold;
+}
+
+form .error {
+    color: red;
+}
