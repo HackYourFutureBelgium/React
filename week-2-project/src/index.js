@@ -2,10 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import {Ex1, Ex10, Ex11, Ex12, Ex13, Ex14, Ex2, Ex3, Ex4, Ex5, Ex6, Ex7, Ex8, Ex9} from './state';
 import {ContactForm, FruitForm, MathForm} from "./forms";
-import {FruitApp, FruitAppWithBalance} from "./communication";
 
 import './index.css';
-import {InteractivePokedex, Pokedex} from "./api";
 
 const App = () => {
     return (
@@ -59,21 +57,6 @@ const App = () => {
                 <FruitForm/>
             </section>
 
-            <section className="app_goal">
-                <h2>Child-Parent and Parent-Child Communication</h2>
-
-                <h3>Fruit App</h3>
-                <FruitApp/>
-
-                <h3>Fruit App With Balance Indicator</h3>
-                <FruitAppWithBalance/>
-            </section>
-
-            <section className="app_goal">
-                <Pokedex/>
-
-                <InteractivePokedex/>
-            </section>
         </section>
     )
 };

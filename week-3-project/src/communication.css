@@ -1,0 +1,40 @@
+.FruitContainer {
+    font-size: 40px;
+    cursor: pointer;
+    display: block;
+    transition: transform 10s ease;
+}
+
+.RotatingContainer {
+    animation-duration: 1s;
+    animation-fill-mode: both;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-name: rotate;
+}
+
+@keyframes rotate {
+    0%, 100% {
+        transform: rotateZ(0deg);
+    }
+    50% {
+        transform: rotateZ(360deg);
+    }
+}
+
+.BouncingContainer {
+    animation-duration: 1s;
+    animation-fill-mode: both;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-name: bounce;
+}
+
+@keyframes bounce {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}

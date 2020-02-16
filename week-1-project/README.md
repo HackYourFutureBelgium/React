@@ -16,7 +16,7 @@ Includes but not limited to:
 - [ESLint](https://eslint.org/)
 - ... 
 
-Take a look at the test in [create-react-app.test.js](./src/__tests__/create-react-app.test.js) to get started with the exercise.
+Take a lookcd  at the test in [create-react-app.test.js](./src/__tests__/create-react-app.test.js) to get started with the exercise.
 
 ## JSX
 

@@ -1,6 +1,30 @@
 import React from 'react';
 import { render, fireEvent } from '@testing-library/react';
-import { FruitApp, FruitAppWithBalance } from '../communication';
+import {FruitApp, FruitAppWithBalance, FruitsAndVegetables, InterActiveFruits} from '../communication';
+
+test('InterActiveFruits: does parent child communication', async () => {
+    const { queryAllByTestId, getByText } = render(<InterActiveFruits />);
+
+    // get the generate button
+    const generateButton = getByText(/Generate/i);
+    fireEvent.click(generateButton);
+
+    // get the bounce button
+    const triggerBounceButton = getByText(/Bounce/i);
+    fireEvent.click(triggerBounceButton);
+
+    const bouncingElements = queryAllByTestId('bouncing');
+
+    expect(bouncingElements.length).toBeGreaterThan(1);
+
+    // get the rotate button
+    const triggerRotateButton = getByText(/Rotate/i);
+    fireEvent.click(triggerRotateButton);
+
+    const rotatingElements = queryAllByTestId('rotating');
+
+    expect(rotatingElements.length).toBeGreaterThan(1);
+});
 
 test('FruitApp: does child parent communication', async () => {
     const { getByText, getByLabelText, queryAllByTestId } = render(<FruitApp />);
@@ -121,4 +145,13 @@ test('FruitAppWithBalance: supports peaches,', async () => {
     fireEvent.click(button);
 
     getByText('🍑')
+});
+
+test('FruitsAndVegetables: controlled inputs', async () => {
+    const { _ } = render(<FruitsAndVegetables />);
+
+    // I did not have time to write a test for this 😅 please test the FruitsAndVegetables rendered and see what the bug is.
+
+    const IHaveFixedTheBug = false;
+    expect(IHaveFixedTheBug).toBeTruthy();
 });
