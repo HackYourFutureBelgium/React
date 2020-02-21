@@ -187,8 +187,8 @@ test('Exercise 9: update state again', () => {
 });
 
 test('Exercise 10: update and rendering more complex states', () => {
-    const {queryByText, getByText, getByRole} = render(<Ex10/>);
-
+    const {queryByText, getByText, getByRole} = render(<Ex10 />);
+    
     getByText("docker");
     getByText("kubernetes");
 
@@ -220,7 +220,7 @@ test('Exercise 11: more complex state update', () => {
 });
 
 test('Exercise 12: passing props and setting state', () => {
-    const my_list = ['surf', 'fencing', 'taekwondo'];
+    const my_list = ['surf','fencing','taekwondo'];
     const {queryByText, getByText, getByRole} = render(<Ex12 base_list={my_list}/>);
 
     my_list.forEach(item => expect(queryByText(item)).toBeNull());
@@ -246,7 +246,7 @@ test('Exercise 13: 2 different state mutations', () => {
     const addButton = getByText('Add element');
     const removeButton = getByText('Remove element');
 
-    for (let i = 0, length1 = default_list.length; i < length1 - 2; i++) {
+    for (let i = 0, length1 = default_list.length; i < length1; i++) {
         fireEvent.click(addButton);
         for (let j = 0; j <= i; j++) {
             getByText(default_list[j])
@@ -277,7 +277,7 @@ test('Exercise 14: 2 different state mutations with props', () => {
     const addButton = getByText('Add element');
     const removeButton = getByText('Remove element');
 
-    for (let i = 0, length1 = my_list.length; i < length1 - 2; i++) {
+    for (let i = 0, length1 = my_list.length; i < length1 ; i++) {
         fireEvent.click(addButton);
         for (let j = 0; j <= i; j++) {
             getByText(my_list[j])

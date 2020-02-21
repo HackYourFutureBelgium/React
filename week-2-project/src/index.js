@@ -39,11 +39,11 @@ const App = () => {
                 <h3>Exercise 11</h3>
                 <Ex11/>
                 <h3>Exercise 12</h3>
-                <Ex12/>
+                <Ex12 base_list={['surf','fencing','taekwondo']}/>
                 <h3>Exercise 13</h3>
                 <Ex13/>
                 <h3>Exercise 14</h3>
-                <Ex14/>
+                <Ex14 base_list={['surf','fencing','taekwondo']}/>
             </section>
 
             <section className="app_goal">

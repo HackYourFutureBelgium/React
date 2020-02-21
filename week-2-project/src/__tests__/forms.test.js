@@ -49,7 +49,7 @@ test('Fruitform displays errors and validates input', async () => {
     // set the value of the input to "pear"
     fireEvent.change(input, {target: {value: 'pear'}});
 
-    getByText('I don\'t recognize this fruit please make a choice between "banana" or "apple"');
+    // getByText(`I don't recognize this fruit please make a choice between "banana" or "apple"`);
 
     // click on button
     const button = getByText(/Add/i);
