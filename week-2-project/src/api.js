@@ -6,19 +6,21 @@ import React, { useEffect, useState } from "react";
 // TODO: after fetching the pokemons from the api set it to our state
 // TODO: render the names of the pokemons
 
-const Pokedex = () => {
+const Pokedex =  () => {
   const [pokemons, setPokemons] = useState([]);
-  console.log("pokemon", pokemons);
   // This use effect might be confusing
   // But is is an example of another type of hook
   // For now it is unimportant to know how it works exactly
   // Just know that it executes the function once on first render
-  useEffect(() => {
-    const fetchPokemons = () => {
-      return fetch("https://pokeapi.co/api/v2/pokedex/2/")
+  useEffect( () => {
+    const  fetchPokemons =  () => {
+      return  fetch("https://pokeapi.co/api/v2/pokedex/2/")
         .then(response => response.json())
-        .then(json => json.pokemon_entries);
+        .then(json => json.pokemon_entries)
+        .then(response => setPokemons(response))
+        
     };
+    fetchPokemons();
     
     /* Use the result of the fetchPokemons function */
     /* set the result using setPokemons, be sure to support the render below */
@@ -30,16 +32,23 @@ const Pokedex = () => {
       {pokemons.map(pokemon => (
         <Pokemon key={pokemon.entry_number} {...pokemon} />
       ))}
+     
     </div>
   );
 };
 
 const Pokemon = (
   {
-    /* add the property we want to use in order to display the name */
+    pokemon /* add the property we want to use in order to display the name */
   }
+  
 ) => {
-  return <article>{/* Render the property here */}</article>;
+
+console.log('###',pokemon)
+  
+  return <article>{
+
+   <li ></li> /* Render the property here */}</article>;
 };
 
 // Exercise Pokedex:

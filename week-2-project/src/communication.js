@@ -130,5 +130,59 @@ const FruitBalance = ({ fruits = [] }) => {
   });
   return <p>{message}</p>;
 };
+const FruitsAndVegetables = () => {
 
-export { FruitApp, FruitAppWithBalance };
+  const [produce, setActiveProduce] = useState('fruits');
+
+  const list = [
+      {
+          produce: 'fruits',
+          default: 'apple',
+          selected: []
+      },
+      {
+          produce: 'vegetables',
+          default: 'cabbage',
+          selected: []
+      }
+  ];
+
+  const [ activeConfiguration ] = list.filter(produceConfiguration => produceConfiguration.produce === produce);
+
+  return (
+      <div>
+          <p>
+              Produces:
+              {list.map((produceConfiguration) => (
+                  <label key={produceConfiguration.produce}>
+                      <input
+                          type="radio"
+                          name="produce"
+                          checked={produceConfiguration.produce === produce}
+                          onChange={() => setActiveProduce(produceConfiguration.produce)}
+                      />{" "}
+                      {produceConfiguration.produce}
+                  </label>
+              ))}
+          </p>
+          {/* You should add a property here, a unique key so the input updates when the configuration changes */}
+          <ProduceInput defaultProduce={activeConfiguration.default} />
+      </div>
+  );
+};
+
+const ProduceInput = ({ defaultProduce }) => {
+  const [produce, setProduce] = useState(defaultProduce);
+
+  const handleChange = (event) => {
+      setProduce(event.target.value);
+  };
+
+  return (
+      <label>
+          Produce: <input onChange={handleChange} value={produce} />
+      </label>
+  );
+};
+
+export { FruitApp, FruitAppWithBalance, InterActiveFruits, FruitsAndVegetables }
