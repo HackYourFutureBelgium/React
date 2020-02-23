@@ -20,6 +20,7 @@ function App() {
           <th>Price</th>
         </thead>
         <ProductListings products={PRODUCTS} />
+
       </table>
     </div>
   );
