@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Homework Todo List Week1</title>
+
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+</head>
+<body>
+    <div id="app"></div>
+
+    <script type="text/jsx">
+        (function() {
+          const todo = [
+            {
+              id: 1,
+              description: "Get out of bed",
+              deadline: "2019-09-11",
+              done: true
+            },
+            {
+              id: 2,
+              description: "Brush teeth",
+              deadline: "2019-09-10",
+              done: false
+            },
+            {
+              id: 3,
+              description: "Eat breakfast",
+              deadline: "2019-09-09",
+              done: false
+            }
+          ];
+          const TodoItemStatic = (props) => {
+            return <li>Activity: {props.todoStaticName},<br/> Time: {props.todoStaticTime} <br/> Deadline: {props.todoStaticDeadline}</li>
+          };
+          const TodoItem = (props) => {
+            const todoItems = props.todo1.map((item, i) =>
+              <li key={i}>
+                <span>Activity: {item.description}</span><br/>
+                <span>Deadline: {item.deadline}</span><br/>
+                <span>Status: {item.done ? "Done" : "Not Yet"}</span>
+              </li>);
+            return <ul>{todoItems}</ul>;
+          };
+          class DynamicTodoList extends React.Component{
+            render(){
+              return (
+                    <article>
+                      <h2>My dynamic todo list</h2>
+                      <TodoItem todo1 = {todo}/>
+                    </article>
+              );
+            }
+          }
+            class TodoList extends React.Component {
+
+                render(){
+                  return (
+                    <div>
+                    <section>
+                        <h1>My Todo List</h1>
+                        <article>
+                          <h2>My static todo list</h2>
+                          <ul>
+                            <TodoItemStatic  todoStaticName = "Get out of bed" todoStaticTime = "09:00" todoStaticDeadline= "Wed Aug 1 2019"/>
+                            <TodoItemStatic  todoStaticName = "Brush teeth" todoStaticTime = "09:10" todoStaticDeadline= "Wed Aug 1 2019"/>
+                            <TodoItemStatic  todoStaticName = "Change clothes" todoStaticTime = "09:15" todoStaticDeadline= "Wed Aug 1 2019"/>
+                            <TodoItemStatic  todoStaticName = "Eat breakfast" todoStaticTime = "09:15" todoStaticDeadline= "Wed Aug 1 2019"/>
+                          </ul>
+                        </article>
+                    </section>
+                    <DynamicTodoList />
+                    </div>
+                  );
+                }
+            }
+            ReactDOM.render(<TodoList />, document.getElementById('app'));
+        }(React, ReactDOM));
+    </script>
+
+</body>
+</html>
