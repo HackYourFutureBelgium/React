@@ -1,0 +1,44 @@
+@import url('https://fonts.googleapis.com/css?family=Coming+Soon|Playfair+Display+SC:700|Sacramento&display=swap');
+body {
+  background: url(assets/BG.png);
+  background-size: 50%;
+}
+h1 {
+  font-family: 'Sacramento', cursive;
+  font-size: 3em;
+  text-align: center;
+}
+h2 {
+  font-family: 'Playfair Display SC', serif;
+}
+span, li, input {
+  font-family: 'Coming Soon', cursive;
+}
+
+li {
+  margin-bottom: 10px;
+}
+label {
+  font-family: 'Sacramento', cursive;
+}
+
+.App {
+background-color: #FEF5F7;
+width: 50%;
+margin: 0 auto;
+padding: 20px;
+}
+
+.done {
+  text-decoration: line-through wavy red;
+}
+.highlight {
+background: url(assets/yellow-brushstroke.png);
+background-repeat: no-repeat;
+background-size: 100% 95%;
+padding: 8px 0;
+}
+
+.App-link {
+  color: #61dafb;
+}
