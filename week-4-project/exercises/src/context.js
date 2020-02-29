@@ -31,8 +31,8 @@ const ShoppingCart = () => {
     )
 };
 
-const MyButton = ({ backgroundColor = 'blue' }) => {
-    return <button style={{backgroundColor: backgroundColor}}>Click</button>
+const MyButton = ({ backgroundColor = 'black' }) => {
+    return <button style={{backgroundColor: 'black' + backgroundColor}}>Click</button>
 };
 
 // Exercise 2: Context
@@ -44,7 +44,7 @@ const Ex2 = () => {
     return (
         <div>
             {/* Set a property value on the provider with as a value "black" */}
-            <ColorContext.Provider>
+            <ColorContext.Provider >
                 <OtherToolbar />
                 <OtherShoppingCart />
             </ColorContext.Provider>
@@ -83,7 +83,7 @@ const Ex3 = () => {
     return (
         <div>
             {/* Set a property value on the provider with as a value color */}
-            <ColorContext.Provider>
+            <ColorContext.Provider> 
                 <button onClick={_ => setColor('pink')}>Pink</button>
                 <button onClick={_ => setColor('blue')}>Blue</button>
                 <button onClick={_ => setColor('black')}>Black</button>

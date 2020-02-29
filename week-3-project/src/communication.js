@@ -9,9 +9,21 @@ import './communication.css';
 const InterActiveFruits = () => {
     const rows = 4;
     const columns = 5;
-    const fruits = ['banana', 'apple'];
+    const fruits = ['banana', 'apple', 'orange', 'peach'];
 
     const [grid, setGrid] = useState([]);
+    const [bounce, setBounce] = useState(false);
+    const [rotate, setRotate] = useState(false);
+
+    const handleBounceClick = () => {
+        bounce? setBounce(false): setBounce(true);
+    }
+
+    const handleRotateClick = () => {
+        rotate? setRotate(false): setRotate(true);
+    }
+
+
 
     // On click generate a grid of fruits
     const handleGenerateClick = () => {
@@ -42,8 +54,9 @@ const InterActiveFruits = () => {
                                 {
                                     row.map((fruit, columnIndex) => {return (
                                         <td key={`${rowIndex}_${columnIndex}_${fruit}`}>
+
                                             {/* TODO: Add state variables for bounce and rotate, assign them here */}
-                                            <InterActiveFruit key={`${rowIndex}_${columnIndex}_${fruit}`} name={fruit} bounce={false} rotate={false} />
+                                            <InterActiveFruit key={`${rowIndex}_${columnIndex}_${fruit}`} name={fruit} bounce={bounce} rotate={rotate} />
                                         </td>
                                     )})
                                 }
@@ -55,8 +68,8 @@ const InterActiveFruits = () => {
             </table>
             <button onClick={handleGenerateClick}>Generate</button>
             {/* TODO: Add a click handler for bounce and rotate */}
-            <button>Bounce</button>
-            <button>Rotate</button>
+            <button onClick={handleBounceClick}>Bounce</button>
+            <button onClick={handleRotateClick}>Rotate</button>
         </section>
     )
 };
@@ -83,7 +96,13 @@ const InterActiveFruit = ({ name, bounce, rotate }) => {
     else if (name === 'apple') {
         fruitMoji = '🍎'
     }
-
+    else if (name === 'orange') {
+        fruitMoji = '🍊'
+    }
+    else if (name === 'peach') {
+        fruitMoji = '🍑'
+    };
+    
     const style = {};
     if (position.length) {
         style.animation = 'unset';
@@ -122,14 +141,21 @@ const InterActiveFruit = ({ name, bounce, rotate }) => {
 
 const FruitApp = () => {
     const [fruits, setFruits] = useState([]);
+    const fruitArr = ['apple', 'banana', 'orange', 'peach']
 
-    const onSubmit = () => {
+    const isValidFruit = (fruitInput) => {
+        return fruitArr.includes(fruitInput);// === 'apple' || fruitInput === 'banana' ||  fruitInput === 'orange' ||  fruitInput === 'peach';;
+    };
+
+    const onSubmit = (fruit) => {
+        let midArr = [...fruits, fruit]
+        setFruits(midArr);
         /* update the fruits here */
     };
 
     return (
         <section className={'fruit'}>
-            <FruitForm onSubmitHandler={onSubmit} />
+            <FruitForm onSubmitHandler={onSubmit} isValidFruit={isValidFruit} fruitArr={fruitArr} />
             <FruitList fruits={fruits} />
         </section>
     )
@@ -137,11 +163,11 @@ const FruitApp = () => {
 
 const FruitList = ({ fruits }) => {
     return (
-        <ul>
-            {fruits.map((fruit, index) => {
-                return <li key={index}><Fruit name={fruit} /></li>
-            })}
-        </ul>
+        <div>
+            {
+            fruits.map((fruit, index) => <span key={index}><Fruit name={fruit} /></span>)
+            }
+        </div>
     )
 };
 
@@ -152,17 +178,20 @@ const Fruit = ({ name }) => {
     }
     else if (name === 'apple') {
         fruitMoji = '🍎'
+    }   
+    else if (name === 'orange') {
+        fruitMoji = '🍊'
     }
+    else if (name === 'peach') {
+        fruitMoji = '🍑'
+    };
+ 
 
     return <span data-testid="fruit">{fruitMoji}</span>
 };
 
-const FruitForm = ({ onSubmitHandler }) => {
+const FruitForm = ({ onSubmitHandler, isValidFruit, fruitArr }) => {
     const [fruit, setFruit] = useState('');
-
-    const isValidFruit = (fruitInput) => {
-        return fruitInput === 'apple' || fruitInput === 'banana';
-    };
 
     const onSubmit = (event) => {
         event.preventDefault(); // We disable the default behaviour of a form
@@ -170,13 +199,14 @@ const FruitForm = ({ onSubmitHandler }) => {
         if (isValidFruit(fruit)) {
             onSubmitHandler(fruit)
         }
+        
     };
 
     return (
         <section className="contact">
             <form onSubmit={onSubmit}>
                 <div className="field">
-                    <label htmlFor="email">Banana or Apple</label> <br />
+                    <label htmlFor="email">Choose {fruitArr.map((fruit, index) => { return (index===fruitArr.length-1)? ` or ${fruit}`: ` ${fruit}`;})}</label> <br />
                     <input
                         id="name"
                         type="text"
@@ -199,27 +229,38 @@ const FruitForm = ({ onSubmitHandler }) => {
 
 const FruitAppWithBalance = () => {
     const [fruits, setFruits] = useState([]);
+    const fruitArr = ['apple', 'banana']
+
+    const isValidFruit = (fruitInput) => {
+        return fruitArr.includes(fruitInput);
+    };
 
     const onSubmitHandler = (fruit) => {
+        let midArr = [...fruits, fruit]
+        setFruits(midArr);
+
         /* update the fruits here */
     };
 
     return (
         <section className={'fruit'}>
-            <FruitForm onSubmitHandler={onSubmitHandler} />
+            <FruitForm onSubmitHandler={onSubmitHandler} isValidFruit={isValidFruit} fruitArr={fruitArr} />
             <FruitList fruits={fruits} />
-            /* Render the component FruitBalance here with the correct prop */
+            <FruitBalance fruits={fruits} />
         </section>
     )
 };
 
-const FruitBalance = ({ fruits = [] }) => {
+const FruitBalance = ({ fruits }) => {
     const bananas = fruits.filter(fruit => fruit === 'banana');
     const apples = fruits.filter(fruit => fruit === 'apple');
-
-    let message = 'Eat more bananas';
+    
+    let message = 'Eat more fruits';
     if (bananas.length > apples.length) {
         message = 'Eat more apples';
+    }
+    if (bananas.length < apples.length) {
+        message = 'Eat more bananes';
     }
 
     return (
@@ -243,6 +284,16 @@ const FruitsAndVegetables = () => {
             produce: 'vegetables',
             default: 'cabbage',
             selected: []
+        },
+        {
+            produce: 'meat',
+            default: 'beef',
+            selected: []
+        },
+        {
+            produce: 'berries',
+            default: 'cranberry',
+            selected: []
         }
     ];
 
@@ -265,7 +316,7 @@ const FruitsAndVegetables = () => {
                 ))}
             </p>
             {/* You should add a property here, a unique key so the input updates when the configuration changes */}
-            <ProduceInput defaultProduce={activeConfiguration.default} />
+            {<ProduceInput key={activeConfiguration.default} defaultProduce={activeConfiguration.default} />}
         </div>
     );
 };

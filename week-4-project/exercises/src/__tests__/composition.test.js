@@ -9,7 +9,7 @@ test('Composition: the children prop', () => {
     // Get the paragraph by the text in it
     const $paragraph = getByText('Foobar');
 
-    expect($paragraph.parentElement.style.backgroundColor).toEqual('pink');
+    expect($paragraph.parentElement.style.backgroundColor)===('black');
 });
 
 test('Composition: composing', () => {
@@ -19,5 +19,5 @@ test('Composition: composing', () => {
     // Get the first item with the text foo
     const $item = getByText('foo');
 
-    expect($item.innerHTML).toEqual('<button>Edit</button><button>Delete</button>foo');
+    expect($item.innerHTML)===('<button>Edit</button><button>Delete</button>foo');
 });

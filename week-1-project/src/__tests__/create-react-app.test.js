@@ -1,6 +1,8 @@
 import React from 'react';
 import {Import, optionalChaining} from '../create-react-app';
 import '../create-react-app.css';
+import * as AllObjects from '../create-react-app';
+
 
 // The goal of these tests is to familiarize you with create-react-app
 // To understand the folder structure, the transpiling, dependency management, ... inside create-react-app
@@ -20,6 +22,7 @@ test('Getting started', () => {
 test('Writing tests', () => {
   // Within create react app Jest is included
   // https://jestjs.io/
+
   // Jest is a testing framework, which is used to run these tests
 
   const multiply = (a, b) => {
@@ -27,7 +30,7 @@ test('Writing tests', () => {
   };
 
   // Fix this assert statement and validate that the test is running
-  expect(multiply(2,3)).toEqual(false);
+  expect(multiply(2,3)).toEqual(6);
 });
 
 test('Exports & Imports: exporting objects', () => {

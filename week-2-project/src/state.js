@@ -11,7 +11,7 @@ const Ex1 = function () {
     return (
         <div>
             <p>{text}</p>
-            <button onClick={() => { setText() /* Fix something here */ }}>
+            <button onClick={() => { setText('HELLO WORLD')}}>
                 Translation please
             </button>
         </div>
@@ -29,8 +29,9 @@ const Ex2 = function () {
     return (
         <div>
             <p>{text[idx]}</p>
-            <button onClick={() => {
-                /* Write some logic here */
+            <button onClick={() => { 
+               let result = (idx === 0)? 1: 0;
+               setIdx(result);
             }}>
                 Translation please
             </button>
@@ -51,7 +52,9 @@ const Ex3 = function () {
         <div>
             <p>{text[idx]}</p>
             <button onClick={() => {
-                /* Write some logic here */
+                let result = idx+1;
+                result = (result>text.length-1)? 0: result;
+                setIdx(result);
             }}>
                 Translation please
             </button>
@@ -74,9 +77,10 @@ const Ex4 = function () {
         <div>
             <p>{text[idx]}</p>
             <button onClick={() => {
-                /* Write some logic here */
+                let result = (idx === 0)? 1: 0;
+                setIdx(result);
             }}>
-                Translation to {/* Insert a variable here */} please
+                Translation to {lang[idx]} please
             </button>
         </div>
     )
@@ -93,7 +97,9 @@ const Ex5 = function () {
     return (
         <div>
             <p>{count}</p>
-            <button /* Add something here */>
+            <button onClick={() => {
+                setCount(count+1);
+            }}>
                 Click me!
             </button>
         </div>
@@ -108,11 +114,14 @@ const Ex5 = function () {
 // No? too bad...
 
 const Ex6 = function () {
-    const [fib, setFib] = useState( /* Set the initial value of the state here */);
+    const [fib, setFib] = useState( [0,1]);
     return (
         <div>
-            <p>{/* The value you should put here is: `fib[0]`, but this will only work after you set the initial state */}</p>
-            <button onClick={() => { /* Write a function to update the state */ }}>
+            <p>{fib[0]}</p>
+            <button onClick={() => {
+              
+              fib[2]=fib[0] + fib[1];
+              setFib([fib[1],fib[2]])}}>
                 Click me!
             </button>
         </div>
@@ -125,11 +134,13 @@ const Ex6 = function () {
 // initial value should be 0
 
 const Ex7 = function () {
-    /* Init the state here */
+    const [count, setCount] = useState(0);
     return (
         <div>
-            <p>{/* Set a value here */}</p>
-            <button /* Add something here */>
+            <p>{count}</p>
+            <button onClick={() => {
+                setCount(count+1);
+            }}>
                 click me
             </button>
         </div>
@@ -146,17 +157,23 @@ const Ex7 = function () {
 // Set the p tag text to: "I like ..." where ... is the text value of the button
 
 const Ex8 = function () {
-    /* init state and function to update it here */
+    const [food, setFood] = useState('... choose what you like.');
     return (
         <div>
-            <p>I like {/* Add something here */}</p>
-            <button /* Add something here */>
+            <p>I like {food}</p>
+            <button onClick={() => {
+                setFood('fruit') 
+            }}>
                 fruit
             </button>
-            <button /* Add something here */>
+            <button onClick={() => {
+                setFood('meat') 
+            }}>
                 meat
             </button>
-            <button /* Add something here */>
+            <button onClick={() => {
+                setFood('vegetables') 
+            }}>
                 vegetables
             </button>
         </div>
@@ -175,14 +192,18 @@ const Ex8 = function () {
 // Append it to the initial 'Last click'
 
 const Ex9 = function () {
-    /* init state and function to update it here */
+    const [click, setClick] = useState('make first click');
     return (
         <div>
-            <p>Last click: {/* Add something here */}</p>
-            <button /* Add something here */>
+            <p>Last click: {click}</p>
+            <button onClick={() => {
+                setClick('UPPER') 
+            }}>
                 UPPER
             </button>
-            <button /* Add something here */>
+            <button onClick={() => {
+                setClick('LOWER') 
+            }}>
                 LOWER
             </button>
         </div>
@@ -203,11 +224,12 @@ const Ex10 = function () {
     return (
         <div>
             <ul>
-                {
-                    /* render the items as an li here */
+                {items.map((e,i) => <li key={i}>{items[i]}</li>)
+                   
                 }
             </ul>
-            <button onClick={() => { /* Set the items here */  }}>
+            <button onClick={() => { 
+                setItems(['docker', 'kubernetes'])}}>
                 Add element
             </button>
         </div>
@@ -237,12 +259,12 @@ const Ex11 = function () {
     return (
         <div>
             <ul>
-                {
-                    /* render the items as an li here */
-                }
+                {items.map((e,i) => <li key={i}>{items[i]}</li>)}
             </ul>
-            <button onClick={() => {
-                /* update the state here */
+            <button onClick={() => {                
+                var newlist = default_list.slice(0, idx);
+                setItems(newlist);
+                setIdx(idx+1);
             }}>
                 Add element
             </button>
@@ -263,13 +285,12 @@ const Ex12 = function ({base_list}) {
     const [idx, setIdx] = useState(1);
     return (
         <div>
-            <ul>
-                {
-                    /* render the items as an li here */
-                }
+ <ul>{items.map((e,i) => <li key={i}>{items[i]}</li>)}
             </ul>
             <button onClick={() => {
-                /* update the state here */
+                var newlist = base_list.slice(0, idx);
+                setItems(   newlist);
+                setIdx(idx+1);
             }}>
                 Add element
             </button>
@@ -289,21 +310,26 @@ const Ex12 = function ({base_list}) {
 const Ex13 = function () {
     const default_list = ['ipsizzle', 'nullizzle', 'sapizzle', 'velizzle', 'crackalackin', 'maurizzle', 'rhoncizzle'];
     const [items, setItems] = useState([]);
-    const [idx, setIdx] = useState(1);
+    const [idx, setIdx] = useState(0);
     return (
         <div>
             <ul>
                 {
-                    /* render the items as an li here */
+                items.map((e,i) => <li key={i}>{items[i]}</li>)
                 }
             </ul>
             <button onClick={() => {
-                /* update the state here */
+                let newlist = [].concat(list)
+                newlist.splice(default_list.idx, 0);
+                setItems(items);
+                
             }}>
                 Add element
             </button>
             <button onClick={() => {
-                /* update the state here */
+                let newlist = [].concat(list)
+                newlist.slice(default_list.idx, 1);
+                setItems(items);
             }}>
                 Remove element
             </button>
@@ -319,60 +345,29 @@ const Ex13 = function () {
 
 const Ex14 = function ({base_list}) {
     const [items, setItems] = useState([]);
-    const [idx, setIdx] = useState(1);
+    const [idx, setIdx] = useState(0);
     return (
         <div>
             <ul>
-                {
-                    /* render the items as an li here */
-                }
+     {items.map((e,i) => <li key={i}>{items[i]}</li>)}
             </ul>
             <button onClick={() => {
-                /* update the state here */
+                let id = (idx<my_list.length)? idx+1: idx;
+                setIdx(id);
+                let newlist = my_list.slice(idx, 1);
+                setItems(newlist);
             }}>
                 Add element
             </button>
             <button onClick={() => {
-                /* update the state here */
+                var id = (idx-1<0)? 0: idx-1;
+                setIdx(id);
+                var mylist = my_list.slice(0, id);
+                setIdx(idx, 1);
             }}>
                 Remove element
             </button>
         </div>
     )
 };
-
-
 export {Ex1, Ex2, Ex3, Ex4, Ex5, Ex6, Ex7, Ex8, Ex9, Ex10, Ex11, Ex12, Ex13, Ex14};
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

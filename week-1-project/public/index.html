@@ -5,32 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#000000" />
     <meta
-            name="description"
-            content="Web site created using create-react-app"
-    />
-    <title>React App</title>
+name="description"
+content="Web site created using create-react-app"/>
+<title>React App</title>
 </head>
 <body>
 <noscript>You need to enable JavaScript to run this app.</noscript>
 <div id="root"></div>
-<!--
-  This HTML file is a template.
-  If you open it directly in the browser, you will see an empty page.
-
-  You can add webfonts, meta tags, or analytics to this file.
-  The build step will place the bundled scripts into the <body> tag.
-
-  To begin the development, run `npm start` or `yarn start`.
-  To create a production bundle, use `npm run build` or `yarn build`.
--->
 </body>
 <script>
     console.log('Waiting for app to load....');
     window.setTimeout(() => {
         console.log('Running tests');
 
-        const $app = document.getElementById('app');
-        console.assert($app, 'The app is not mounted please mount it to the root node in index.js .');
+        const element = document.getElementById('app');
+        console.assert($App, 'The app is not mounted please mount it to the root node in index.js .');
 
         const $title = document.getElementById('app h1');
         console.assert($title && $title.innerHTML === 'My App', 'The heading of the app is not My App. Make sure the App is mounted with props defining a title.');

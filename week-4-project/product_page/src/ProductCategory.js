@@ -1,6 +1,7 @@
 import React from 'react';
 import Product from "./Product";
 
+
 const ProductCategory = ({category, products}) => {
     const $categoryRow = [
         <tr>{category}</tr>

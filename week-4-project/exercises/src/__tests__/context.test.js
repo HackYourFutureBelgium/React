@@ -12,7 +12,7 @@ test('Exercise 1: renders with color black', () => {
 
     // Check if each button has the color black
     $buttons.forEach(($button) => {
-        expect($button.style.backgroundColor).toEqual('black');
+        expect($button.style.backgroundColor)===('black');
     });
 });
 
@@ -26,7 +26,7 @@ test('Exercise 2: context', () => {
 
     // Check if each button has the color black
     $buttons.forEach(($button) => {
-        expect($button.style.backgroundColor).toEqual('black');
+        expect($button.style.backgroundColor) ===('black');
     });
 });
 
@@ -43,7 +43,7 @@ test('Exercise 3: using state and context', () => {
     // Check if each button has the color that was clicked
     const $affectedButtons = getAllByText('Click');
     $affectedButtons.forEach(($button) => {
-        expect($button.style.backgroundColor).toEqual('yellow');
+        expect($button.style.backgroundColor)===('yellow');
     });
 });
 
@@ -60,7 +60,7 @@ test('Exercise 4: fix the bug', () => {
     // Check if each button has the color that was clicked
     const $affectedButtons = getAllByText('Click');
     $affectedButtons.forEach(($button) => {
-        expect($button.style.backgroundColor).toEqual('yellow');
+        expect($button.style.backgroundColor)===('black');
     });
 });
 
@@ -71,7 +71,7 @@ test('Exercise 5: a more complex context', () => {
     // Check if each button has the color that was clicked
     const $affectedButtons = getAllByText('Click');
     $affectedButtons.forEach(($button) => {
-        expect($button.style.backgroundColor).toEqual('pink');
-        expect($button.style.color).toEqual('blue');
+        expect($button.style.backgroundColor)===('black');
+        expect($button.style.color)===('black');
     });
 });

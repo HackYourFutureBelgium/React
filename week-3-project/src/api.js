@@ -7,7 +7,7 @@ import React, {useEffect, useState} from "react";
 // TODO: render the names of the pokemons
 
 const Pokedex = () => {
-    const [pokemons, setPokemons] = useState([]);
+const [pokemons, setPokemons] = useState([]);
 
     // This use effect might be confusing
     // But is is an example of another type of hook
@@ -22,6 +22,8 @@ const Pokedex = () => {
 
         /* Use the result of the fetchPokemons function */
         /* set the result using setPokemons, be sure to support the render below */
+        fetchPokemons().then(setPokemons)
+        
     }, []);
 
     return (
@@ -34,10 +36,10 @@ const Pokedex = () => {
     )
 };
 
-const Pokemon = ({ /* add the property we want to use in order to display the name */ }) => {
+const Pokemon = ({ pokemon_species: { name } }) => {
     return (
         <article>
-            {/* Render the property here */}
+            {name}
         </article>
     )
 };
@@ -61,20 +63,23 @@ const InteractivePokedex = () => {
             return fetch('https://pokeapi.co/api/v2/pokedex/2/')
                 .then(response => response.json())
                 .then(json => json.pokemon_entries);
+                
         };
-
         /* Use the result of the fetchPokemons function */
         /* set the result using setPokemons, be sure to support the render below */
+        fetchPokemons().then(fetchPokemons())
     }, []);
 
     const onSelectHandler = (pokemon) => {
-        const fetchPokemon = () => {
+    const fetchPokemon = () => {
             return fetch(pokemon.url)
                 .then(response => response.json());
         };
 
         /* Use the result of the fetchPokemon function */
         /* set the result using selectedPokemon, be sure to support the render below */
+        fetchPokemon().then(onSelectHandler())
+    
     };
 
     return (
@@ -83,7 +88,9 @@ const InteractivePokedex = () => {
             {
                 selectedPokemon === false
                 ? (
-                    pokemons.map(pokemon => <InterActivePokemon key={pokemon.entry_number} {...pokemon} /* pass the onSelectHandler here a property */ />)
+                    pokemons.map(pokemon => <InterActivePokemon key={pokemon.entry_number} {...pokemon} 
+                        
+                        type={pokemon[InterActivePokemon].type} />)
                 )
                 : (
                     <DetailedPokemon {...selectedPokemon} />
@@ -103,13 +110,11 @@ const DetailedPokemon = ({ flavor_text_entries }) => {
 };
 
 const InterActivePokemon = ({ pokemon_species, onSelectHandler }) => {
-    const onClick = () => {
-        /* trigger the onSelectedHandler function with the pokemon_species */
-    };
+    const onClick = () => {setPokemons};
 
     return (
         <article>
-            {/* Render the property here */}
+            {pokemon_species, onSelectHandler}
             <button onClick={onClick}>Learn more</button>
         </article>
     )

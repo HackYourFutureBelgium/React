@@ -2,25 +2,25 @@ import React, {createContext, useContext, useState} from 'react';
 
 // Composition 1: The children props
 // TODO: use the children prop in the correct location
-
 const Comp1 = () => {
     return (
         <section>
             <ColoredSection>
-                <p>Foobar</p>
+             <p>Foobar</p>
             </ColoredSection>
         </section>
     )
 };
-
-const ColoredSection = ({ children }) => {
+const ColoredSection = ({children }) => {
     // Move the children props to the correct location
     return (
         <div>
             <div style={{backgroundColor: 'pink'}}>
-            </div>
-            <div style={{backgroundColor: 'yellow'}}>
+                
                 {children}
+            </div >
+            <div style={{backgroundColor: 'yallow'}}>
+                
             </div>
         </div>
     )
