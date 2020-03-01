@@ -1,0 +1,123 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>Hack Your Future</title>
+
+		<link rel="stylesheet" href="css/reset.css">
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/hyf.css">
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="lib/css/monokai.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<section>
+					<h1>Hack Your Future</h1>
+					<p>React - Lesson 5</p>
+				</section>
+				<section>
+					<section>
+						<h2>Agenda</h2>
+					</section>
+					<section>
+						<p>
+							<a href="https://github.com/hackyourfuturebelgium/react/wiki/Lesson-Plan-wk-3">Lesson plan</a>
+						</p>
+						<ol>
+							<li>Review</li>
+							<li>(Optional) Reducer</li>
+							<li>(Optional) Using 3rd party components</li>
+							<li>Making an application</li>
+							<li>~ The End ~</li>
+						</ol>
+					</section>
+				</section>
+				<section>
+					<section>
+						<h3>Review</h3>
+					</section>
+					<section>
+						<pre><code class="hljs text">
+useEffect(() => {
+  async function fetchData() {
+    // You can await here
+    const response = await MyAPI.getData(someId);
+    // ...
+  }
+  fetchData();
+}, [someId]); // Or [] if effect doesn't need props or state
+						</code></pre>
+					</section>
+					<section>
+						<pre><code class="hljs text">
+useEffect(async () => {
+	/**
+	 * @returns {Promise}
+	 */
+	const fetchPokemons = async () => {
+		return fetch('https://pokeapi.co/api/v2/pokedex/2/')
+			.then(response => response.json())
+			.then(json => json.pokemon_entries);
+	};
+
+	const fetchedPokemons = await fetchPokemons();
+
+	setPokemons(fetchedPokemons);
+
+	/* Use the result of the fetchPokemons function */
+	/* set the result using setPokemons, be sure to support the render below */
+}, []);
+						</code></pre>
+					</section>
+					<section>
+						<pre><code class="hljs text">
+useEffect(() => {
+	/**
+	 * @returns {Promise}
+	 */
+	const fetchPokemons = async () => {
+		let response = await fetch('https://pokeapi.co/api/v2/pokedex/2/');
+		response = await response.json();
+		response = response.pokemon_entries;
+		setPokemons(response);
+	};
+
+	fetchPokemons();
+}, []);
+						</code></pre>
+					</section>
+				</section>
+			</div>
+		</div>
+
+		<script src="js/reveal.js"></script>
+
+		<script>
+			// More info about config & dependencies:
+			// - https://github.com/hakimel/reveal.js#configuration
+			// - https://github.com/hakimel/reveal.js#dependencies
+			Reveal.initialize({
+				dependencies: [
+					{ src: 'plugin/markdown/marked.js' },
+					{ src: 'plugin/markdown/markdown.js' },
+					{ src: 'plugin/notes/notes.js', async: true },
+					{ src: 'plugin/highlight/highlight.js', async: true }
+				]
+			});
+		</script>
+	</body>
+</html>
