@@ -2,6 +2,7 @@ import React from 'react';
 import { App, MyApp } from '../component';
 import { render, fireEvent } from '@testing-library/react';
 
+
 // Time to get started with writing React components.
 // Components let you split the UI into independent, reusable pieces, and think about each piece in isolation
 // https://reactjs.org/docs/components-and-props.html
@@ -19,6 +20,7 @@ test('The component App exist and can render', () => {
 
 test('The component MyApp can be imported and can render', () => {
     // Create a new component in component.js called MyApp
+    
     // Export that component in component.js
 
     render(<MyApp />);
