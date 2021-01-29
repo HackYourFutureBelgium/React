@@ -18,8 +18,13 @@ function NewsArticle() {
     return (
         <article>
             <h1>Article</h1>
+            
         </article>
     )
 }
+function MyApp() {
+    return <p>My First React App</p>;
+ 
+}
 
-export { App };
+export { App, MyApp };

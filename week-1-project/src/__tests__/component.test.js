@@ -63,6 +63,7 @@ test('The App component does a calculation and renders the result', () => {
 test('The MyApp component renders 200 NewsArticle components', () => {
     const { getAllByRole } = render(<MyApp />);
 
+
     // Validates if the rendered App contains articles which are rendered by NewsArticle
     const elements = getAllByRole('article');
     expect(elements.length).toEqual(200);
