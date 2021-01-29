@@ -27,7 +27,7 @@ test('The component App uses and renders with other props', async () => {
 
 
 test('Given a new prop the app renders with a description', async () => {
-    const { getByTestId } = render(<App title="My App" />);
+    const { getByTestId } = render(<App title="My App" addDescription = {true} />);
 
     const element = await getByTestId('description');
 

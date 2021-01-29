@@ -43,7 +43,7 @@ test('App specifies attributes', async () => {
 
     // Fix one of the statements
     expect(element.className).toBeDefined();
-    expect(element.className).toEqual('');
+    expect(element.className).toEqual('title');
 });
 
 test('App renders with an input and label defining for', async () => {
@@ -52,7 +52,7 @@ test('App renders with an input and label defining for', async () => {
     const label = await getByTestId('label');
 
     // Fix the assert statement
-    expect(label.getAttribute('for')).toEqual('');
+    expect(label.getAttribute('for')).toEqual('input-demo');
 });
 
 test('App prevents Injection Attacks', async () => {
@@ -64,5 +64,5 @@ test('App prevents Injection Attacks', async () => {
     const element = await getByTestId('injection');
 
     // Fix the assert statement
-    expect(element.innerHTML).toEqual('');
+    expect(element.innerHTML).toEqual('&lt;script&gt;alert(\"danger\");&lt;/script&gt;');
 });
