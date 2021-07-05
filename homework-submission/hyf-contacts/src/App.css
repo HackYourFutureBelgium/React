@@ -1,0 +1,17 @@
+.container {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  color: white;
+}
+
+.side_bar {
+  background-color: rgb(53, 52, 52);
+  width: 30%;
+  min-width: 200px;
+}
+
+.contacts_full {
+  background-color: #282c34;
+  width: 70%;
+}
