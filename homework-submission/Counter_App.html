@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Counter App</title>
+
+    <style>
+      html {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+      }
+
+      *,
+      *:before,
+      *:after {
+        box-sizing: inherit;
+      }
+
+      body {
+        background-color: #282c34;
+        color: white;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto",
+          "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
+          "Helvetica Neue", sans-serif;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+
+      #app {
+        margin: auto;
+        width: 50%;
+        display: flex;
+        align-items: center;
+      }
+
+      .counter-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        align-items: center;
+        width: 100%;
+        height: 400px;
+      }
+
+      .counter-display {
+        background: black;
+        border-radius: 100%;
+        width: 200px;
+        height: 200px;
+        text-align: center;
+        line-height: 200px;
+        font-size: 20px;
+      }
+
+      .counter-controls button {
+        margin: auto 20px;
+      }
+
+      label {
+        font-weight: bold;
+      }
+
+      input {
+        background-color: white;
+        border: 0;
+        font-size: inherit;
+        color: black;
+        padding: 10px 20px;
+      }
+
+      .button {
+        background-color: inherit;
+        border: 2px solid white;
+        color: white;
+        margin: 4px 2px;
+        padding: 15px 32px;
+        font-size: inherit;
+        cursor: pointer;
+      }
+
+      .danger {
+        background-color: #ff6666;
+        border: none;
+      }
+
+      .primary {
+        background-color: #4c4cff;
+        border: none;
+        margin: 2px 0px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app"></div>
+    <!-- Load React. -->
+    <!-- Note: when deploying, replace "development.js" with "production.min.js". -->
+    <script
+      src="https://unpkg.com/react@16/umd/react.development.js"
+      crossorigin
+    ></script>
+    <script
+      src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"
+      crossorigin
+    ></script>
+
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+
+    <!-- Load our React components. -->
+    <script type="text/babel">
+      // GOAL: create a simple counter app
+      // 1. Create a Counter class-based component
+      // 2. Initialise the count (which is in the class state) value (e.g. count = 40)
+      // 3. Create reusable components for inc/dec buttons
+      // 4. Create event handler functions
+      // 5. Link handlers to button onClick attribute
+
+      // Bonus: notify user when invalid value is entered
+      // Bonus: persist count value
+
+      class CounterApp extends React.Component {
+        state = {
+          count: 0
+        };
+
+        // set count initial value
+        handleSubmit = e => {
+          e.preventDefault();
+          // string to number:
+          // +var
+          // parseInt(var, 10)
+          // e.target.initcount.valueAsNumber
+
+          // e.target.initcount returns the element with name initcount
+          this.setState({ count: e.target.initcount.valueAsNumber });
+        };
+
+        // decrement count value
+        handleDecrease = () => {
+          this.setState({ count: this.state.count - 1 });
+        };
+
+        // increment count value
+        handleIncrease = () => {
+          this.setState({ count: this.state.count + 1 });
+        };
+
+        render() {
+          const countHandlers = {
+            handleDecrease: this.handleDecrease,
+            handleIncrease: this.handleIncrease
+          };
+          return (
+            <React.Fragment>
+              <InitCount handleSubmit={this.handleSubmit} />
+              <CounterView count={this.state.count} {...countHandlers} />
+            </React.Fragment>
+          );
+        }
+      }
+
+      const InitCount = ({ handleSubmit }) => {
+        return (
+          <form onSubmit={handleSubmit}>
+            <label htmlFor="initcount">
+              Intial value:
+              <input
+                id="initcount"
+                type="number"
+                name="initcount"
+                defaultValue={0}
+              />
+            </label>
+            <Button className="danger" type="submit">
+              Start count
+            </Button>
+          </form>
+        );
+      };
+
+      const CounterView = ({ count, handleDecrease, handleIncrease }) => {
+        return (
+          <div className="counter-container">
+            <div className="counter-display">{count}</div>
+            <div className="counter-controls">
+              <Button handler={handleDecrease}>-</Button>
+              <Button handler={handleIncrease}>+</Button>
+            </div>
+          </div>
+        );
+      };
+
+      const Button = ({ handler, children, className = "", ...rest }) => {
+        // what's ...rest again??? see => https://medium.com/javascript-in-plain-english/es6-spread-parameter-vs-rest-operator-5e3c924c4e1f
+        // className = "" set default value of className to ""
+        let classNames = className + " button";
+        return (
+          <button className={classNames} onClick={handler} {...rest}>
+            {children}
+          </button>
+        );
+      };
+
+      ReactDOM.render(<CounterApp />, document.getElementById("app"));
+    </script>
+  </body>
+</html>
