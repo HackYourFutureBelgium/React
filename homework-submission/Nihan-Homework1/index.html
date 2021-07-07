@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>ToDoList homework</title>​
+  <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+  <script src="https://unpkg.com/prop-types@15.6/prop-types.min.js"></script>
+  <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+  <style>
+    .crossed {
+      text-decoration: line-through;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div id="thisIsWhereReactIsInjected"></div>
+
+  <script type="text/babel">
+    (function() {
+
+      const TodoItem = ({description, deadline, done}) => {
+        return (
+          <li className = {done===true ? 'crossed' :'' }>{description}, {deadline}</li>
+          );
+       }
+      class StaticList extends React.Component {          
+          render() {
+            return (
+              <div>
+                <h2>My static todo list</h2>
+                <ul>
+                  <TodoItem description="Get out of bed" deadline="Wed Sep 13 2017" />
+                  <TodoItem description="Brush teeth " deadline= "Thu Sep 14 2017" />
+                  <TodoItem description= "Eat breakfast" deadline="Fri Sep 15 2017" />
+                </ul>
+              </div>
+            );
+          }
+        }
+        class DynamicList extends React.Component {
+          render() {
+             const {
+               todos
+             }=this.props;
+
+            const $todos = todos.map((todo) => <TodoItem {...todo}/>);
+            return(
+              <ul>
+              {$todos}
+              </ul>
+
+            )
+          }
+        }
+        class App extends React.Component {
+          render() {
+
+            return (
+              <div>
+                <StaticList />
+                <DynamicList todos={this.props.data} />
+
+              </div>
+            );
+          }
+        }
+        const todos=  [
+          {
+            id: 1,
+            description: "Get out of bed",
+            deadline: "2017-09-11",
+            done: true
+          },
+          {
+            id: 2,
+            description: "Brush teeth",
+            deadline: "2017-09-10",
+            done: false
+          },
+          {
+            id: 3,
+            description: "Eat breakfast",
+            deadline: "2017-09-09",
+            done: false
+          }
+        ];
+       
+      ReactDOM.render(<App data= {todos} />, document.getElementById("thisIsWhereReactIsInjected"));
+    }(React,ReactDOM));
+    </script>
+
+</body>
+
+</html>
